@@ -71,3 +71,4 @@ serialize_rdf_cursos = {
 
 serialize_all_to_rdf(serialize_rdf_cursos)
 
+# saving
