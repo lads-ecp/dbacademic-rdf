@@ -66,6 +66,20 @@ serialize_rdf_cursos = {
             "rdf_path" : "rdf/cursos_ufpb.rdf"
         },
 
+        { ## ufms
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "curso", 
+                    "id": "id",
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Mato_Grosso_do_Sul",
+                    
+            },
+
+            "data" : lambda : dados_sigaa("https://dadosabertos.ufms.br/api/action/datastore_search?resource_id=e239fd31-fe43-45e1-9d84-ba60a8d7fae7&limit=5"),
+            
+            "rdf_path" : "rdf/cursos_ufms.rdf"
+        },
+
     ]
 }
 
