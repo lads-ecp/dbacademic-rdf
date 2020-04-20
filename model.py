@@ -11,24 +11,33 @@ VIVO = Namespace("http://vivoweb.org/ontology/core#")
 BIBO = Namespace("http://purl.org/ontology/bibo/")
 OWL = Namespace("http://www.w3.org/TR/owl-ref/")
 OPENCIN = Namespace("http://purl.org/ontology/opencin/")
-
+DBACAD = Namespace("http://purl.org/ontology/dbacademic/")
+AIISO = Namespace("http://purl.org/vocab/aiiso/schema#")
 
 
 
 class Curso ():
 
-    nome = OPENCIN.name
-    area = OPENCIN.knowledgeArea
-    coordenador = OPENCIN.hasCoordinator # pela ontologia, nao seria o dominio correto
-    unidade = OPENCIN.isPartOf
-    university = OPENCIN.isPartOf
+    nome = FOAF.name
 
-    @RdfsClass(OPENCIN.Undergratuate, "https://www.dbacademic.tech/course/")
+    area = OPENCIN.knowledgeArea
+
+    coordenador = AIISO.responsibilityOf
+
+    unidade = AIISO.part_of
+
+    university = AIISO.part_of
+
+    code= AIISO.code
+
+    @RdfsClass(OPENCIN.Undergratuate, "https://www.dbacademic.tech/resource/")
     @BNamespace('cin', OPENCIN)
+    @BNamespace('aiiso', AIISO)
+    @BNamespace('foaf', FOAF)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.id = str(dict["id"])
-
+        self.code = str (dict["id"])
 
         if "area" in dict:
             self.area = Literal(dict["area"])
@@ -43,34 +52,35 @@ class Curso ():
 
 
 
-
-
-
 class Docente ():
 
     nome = FOAF.name
     siape = OPENCIN.SIAPE
     formacao = OPENCIN.academicDegree
+    
     sameas = OWL.sameas
-    unidade = VIVO.AcademicDepartment
-    sexo = FOAF.gender
 
-    telefone = FOAF.phone
+    unidade = DBACAD.hasOrganization
+
+    sexo = VCARD.hasGender
+
+    telefone = VCARD.hasTelephone
     imagem = VCARD.hasPhoto
     email = VCARD.hasEmail
     lattes = OPENCIN.lattes
     descricao = DBO.abstract
     
-    @RdfsClass(OPENCIN.FullProfessor, "https://www.dbacademic.tech/professor/")
+    @RdfsClass(OPENCIN.FullProfessor, "https://www.dbacademic.tech/resource/")
     @BNamespace('foaf', FOAF)
     @BNamespace('cin', OPENCIN)
     @BNamespace('owl', OWL)
     @BNamespace('vcard', VCARD)
     @BNamespace('dbo', DBO)
+    @BNamespace('dbacad', DBACAD)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.siape = Literal(dict["siape"])
-        self.id = str(dict["siape"])
+        self.id = str(dict["id"])
         if "formacao" in dict:
             self.formacao = Literal(dict["formacao"])
         if "sameas" in dict:
@@ -112,27 +122,41 @@ class Unidade ():
     sameas = OWL.sameas
 
      # unidade ? ou subunidade
-    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/")   
+    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/center/")   
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.id = str(dict["id"])
         if "sameas" in dict:
             self.sameas = URIRef(dict["sameas"])
 
+class Department ():
 
+    nome = OPENCIN.name
+    sameas = OWL.sameas
+
+     # unidade ? ou subunidade
+    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/department/")   
+    def __init__(self, dict):
+        self.nome = Literal(dict["nome"])
+        self.id = str(dict["id"])
+        if "sameas" in dict:
+            self.sameas = URIRef(dict["sameas"])
 
 class Discente ():
 
     nome = FOAF.name
     curso = OPENCIN.belongsA
+    code= AIISO.code
 
 
-    @RdfsClass(OPENCIN.Student, "https://www.dbacademic.tech/student/")
+    @RdfsClass(OPENCIN.Student, "https://www.dbacademic.tech/resource/")
     @BNamespace('foaf', FOAF)
     @BNamespace('cin', OPENCIN)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict ):
         self.nome = Literal(dict["nome"])
-        self.id = str(dict["id"])
+        self.id = dict["id"]
+        self.code = dict["code"]
         if "curso" in dict:
             self.curso = URIRef(dict["curso"])
 
@@ -156,10 +180,10 @@ class Monografia ():
 
     title = DC.title
     autor = DC.creator
-    curso = DC.publisher
+    curso = BIBO.issuer
     orientador = DC.contributor
 
-    @RdfsClass(BIBO.Thesis, "https://www.dbacademic.tech/thesis/")
+    @RdfsClass(BIBO.Report, "https://www.dbacademic.tech/monography/")
     @BNamespace('dc', DC)
     @BNamespace('bibo', BIBO)
     def __init__(self, dict ):
