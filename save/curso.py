@@ -25,9 +25,9 @@ serialize_rdf_cursos = {
                     "id": lambda d: hashcode ( "ufrn", d["id_curso"]),
                     "code" : "id_curso",
                     "area" : "area_conhecimento",
-                    "coordenador" : lambda d: "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=" + str(d["id_coordenador"]),
-                    "unidade" : lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?lc=pt_BR&id=" + d["id_unidade_responsavel"],
+                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_coordenador"])),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
+                    "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_unidade_responsavel"])),
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/curso/portal.jsf?id=" + d["id_curso"],
             },
 
@@ -82,6 +82,23 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_sigaa("https://dadosabertos.ufms.br/api/action/datastore_search?resource_id=e239fd31-fe43-45e1-9d84-ba60a8d7fae7"),
             
             "rdf_path" : "rdf/cursos_ufms.rdf"
+        },
+
+        { ## ufma
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code" : "codigo",
+                    "id": lambda d: hashcode ( "ufma", d["codigo"]),
+                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["coordenador"])),
+                    "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/curso/portal.jsf?id=" + d["codigo"],
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Maranhao",
+                    
+            },
+
+            "data" : lambda : dados_ufma("https://dados-ufma.herokuapp.com/api/v01/curso/"),
+            
+            "rdf_path" : "rdf/cursos_ufma.rdf"
         },
 
     ]

@@ -8,8 +8,7 @@ def dados_sigaa (url):
     return data["result"]["records"]
 
 
-def dados_ufma ():
-    url = "https://dados-ufma.herokuapp.com/api/v01/docente/"
+def dados_ufma (url):
     data = requests.get(url).json()
     return data["data"]
 

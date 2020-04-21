@@ -4,7 +4,7 @@ from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 from utils import dados_sigaa, dados_ufma, hashcode
 
 sexo_dict = {
-    'F' : 'male',
+    'F' : 'Male',
     'M' : 'Female'
 }
 
@@ -23,7 +23,7 @@ serialize_rdf_docentes = {
                     "siape": "siape",
                     "formacao" : "formacao",
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"],
-                    "sexo": lambda d: sexo_dict[d["sexo"]],
+                    #"sexo": lambda d: sexo_dict[d["sexo"]],
                     "unidade": lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?id=" + d["id_unidade_lotacao"]
             },
 
@@ -50,7 +50,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufpi
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -93,7 +93,7 @@ serialize_rdf_docentes = {
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/docente/portal.jsf?siape=" + str(d["siape"])
             }, 
 
-            "data" :  lambda : dados_ufma(),
+            "data" :  lambda : dados_ufma("https://dados-ufma.herokuapp.com/api/v01/docente/"),
             
             "rdf_path" : "rdf/docentes_ufma.rdf"
         },

@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma
+from utils import dados_sigaa, dados_ufma, hashcode
 
 
 
@@ -17,12 +17,13 @@ serialize_rdf_grupopesquisa = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "base_pesquisa", 
-                    "id": lambda d : "ufrn_"+ str(d["codigo"]),
+                    "id": lambda d : hashcode ("ufrn", str(d["codigo"])),
                     "area" : "area_conhecimento_cnpq",
-                    "coordenador": lambda d: "https://www.dbacademic.tech/professor/ufrn_" + d["id_coordenador"]
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
+                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_coordenador"])),
             },
 
-            "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=09951a7c-46c4-4d1b-a537-2e50caa070c4&limit=5"),
+            "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=09951a7c-46c4-4d1b-a537-2e50caa070c4"),
             "rdf_path" : "rdf/grupospesquisa_ufrn.rdf"
         }
 

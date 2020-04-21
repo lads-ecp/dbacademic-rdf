@@ -118,29 +118,48 @@ class Docente ():
 
 class Unidade ():
 
-    nome = OPENCIN.name
+    nome = FOAF.name
     sameas = OWL.sameas
+    diretor = AIISO.responsibilityOf
+    code= AIISO.code
 
      # unidade ? ou subunidade
-    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/center/")   
+    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/resource/")   
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('owl', OWL)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
+        self.code = dict["code"]
         self.id = str(dict["id"])
         if "sameas" in dict:
             self.sameas = URIRef(dict["sameas"])
+        if "diretor" in dict:
+            self.diretor = URIRef(dict["diretor"])
 
-class Department ():
+class Subunidade ():
 
-    nome = OPENCIN.name
+    nome = FOAF.name
     sameas = OWL.sameas
+    chefe = AIISO.responsibilityOf
+    unidade = AIISO.part_of
+    code= AIISO.code
 
      # unidade ? ou subunidade
-    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/department/")   
+    @RdfsClass(OPENCIN.Department, "https://www.dbacademic.tech/resource/")   
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('owl', OWL)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.id = str(dict["id"])
+        self.code = dict["code"]
         if "sameas" in dict:
             self.sameas = URIRef(dict["sameas"])
+        if "unidade" in dict:
+            self.unidade = URIRef(dict["unidade"])
 
 class Discente ():
 
@@ -163,18 +182,22 @@ class Discente ():
 class GrupoPesquisa ():
 
 
-    nome = OPENCIN.name
+    nome = FOAF.name
     area = OPENCIN.knowledgeArea
-    university = OPENCIN.University
+    university = OPENCIN.isPartOf
     coordenador = OPENCIN.hasCoordinator
 
-    @RdfsClass(OPENCIN.researchGroup, "https://www.dbacademic.tech/researchgroup/")
-    @BNamespace('dc', DC)
+    @RdfsClass(AIISO.ResearchGroup, "https://www.dbacademic.tech/resource/")
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict):
         self.id = dict["id"]
         self.nome = Literal (dict["nome"])
         self.area = Literal (dict["area"])
         self.coordenador = URIRef(dict["coordenador"])
+        self.university = URIRef(dict["university"])
+
   
 class Monografia ():
 
@@ -189,8 +212,10 @@ class Monografia ():
     def __init__(self, dict ):
         self.title = Literal(dict["titulo"])
         self.id = dict["id"]
-        #self.curso = Literal ("curso")
-        #self.curso = URIRef("https://sigaa.ufma.br/sigaa/public/curso/portal.jsf?id=" + str(curso))
-        #self.autor = Literal("autor")
-        #self.orientador = Literal("orientador")
-        #self.orientador = URIRef("https://sigaa.ufma.br/sigaa/public/docente/portal.jsf?siape=" + str(orientador))
+        if "curso" in dict:
+            self.curso = URIRef(dict["curso"])
+        if "autor" in dict:
+            #self.autor = URIRef(dict["autor"])
+            self.autor = Literal(dict["autor"])
+        if "orientador" in dict:
+            self.orientador = URIRef(dict["orientador"])        

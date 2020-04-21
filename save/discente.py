@@ -31,12 +31,26 @@ serialize_rdf_discentes = {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufpi", d["matricula"]),
                     "code" : "matricula",
-                    "curso": lambda d: "https://www.dbacademic.tech/resource" + hashcode ( "ufpi", str (d["id_curso"]))
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi", str (d["id_curso"]))
             },
 
             "data" : lambda :  dados_sigaa("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b"),
             
             "rdf_path" : "rdf/discentes_ufpi.rdf"
+        },
+
+        { ## ufma
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d: hashcode ("ufma", d["matricula"]),
+                    "code" : "matricula",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", str (d["codigo_curso"]))
+            },
+
+            "data" : lambda :  dados_ufma("https://dados-ufma.herokuapp.com/api/v01/discente/"),
+            
+            "rdf_path" : "rdf/discentes_ufma.rdf"
         },
 
     ]
