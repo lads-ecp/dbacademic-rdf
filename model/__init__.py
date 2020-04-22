@@ -5,30 +5,44 @@ from rdflib.namespace import DC, FOAF
 
 
 VCARD = Namespace('https://www.w3.org/2006/vcard/ns#')
-DBO = Namespace('http://dbpedia.org/data3/.n3#')
+DBO = Namespace('http://dbpedia.org/ontology/')
 DC = Namespace('http://purl.org/dc/terms/#')
 VIVO = Namespace("http://vivoweb.org/ontology/core#")
 BIBO = Namespace("http://purl.org/ontology/bibo/")
 OWL = Namespace("http://www.w3.org/TR/owl-ref/")
 OPENCIN = Namespace("http://purl.org/ontology/opencin/")
+DBACAD = Namespace("http://purl.org/ontology/dbacademic/")
+AIISO = Namespace("http://purl.org/vocab/aiiso/schema#")
 
 
+ORG = Namespace ("https://www.w3.org/TR/vocab-org/")
 
+
+OPENUAI = Namespace("http://purl.org/ontology/openuai#")
 
 class Curso ():
 
-    nome = OPENCIN.name
-    area = OPENCIN.knowledgeArea
-    coordenador = OPENCIN.hasCoordinator # pela ontologia, nao seria o dominio correto
-    unidade = OPENCIN.isPartOf
-    university = OPENCIN.isPartOf
+    nome = FOAF.name
 
-    @RdfsClass(OPENCIN.Undergratuate, "https://www.dbacademic.tech/course/")
+    area = OPENUAI.hasKnowledgeArea
+
+    coordenador = AIISO.responsibilityOf
+
+    unidade = AIISO.responsibilityOf
+
+    university = AIISO.responsibilityOf
+
+    code= AIISO.code
+
+    @RdfsClass(AIISO.Programme, "https://www.dbacademic.tech/resource/")
     @BNamespace('cin', OPENCIN)
+    @BNamespace('uai', OPENUAI)
+    @BNamespace('aiiso', AIISO)
+    @BNamespace('foaf', FOAF)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.id = str(dict["id"])
-
+        self.code = str (dict["id"])
 
         if "area" in dict:
             self.area = Literal(dict["area"])
@@ -43,34 +57,36 @@ class Curso ():
 
 
 
-
-
-
 class Docente ():
 
     nome = FOAF.name
-    siape = OPENCIN.SIAPE
-    formacao = OPENCIN.academicDegree
-    sameas = OWL.sameas
-    unidade = VIVO.AcademicDepartment
-    sexo = FOAF.gender
+    siape = OPENCIN.siape
 
-    telefone = FOAF.phone
+    formacao = OPENCIN.academicDegree
+    
+    sameas = OWL.sameas
+
+    unidade = ORG.memberOf
+
+    sexo = VCARD.hasGender
+
+    telefone = VCARD.hasTelephone
     imagem = VCARD.hasPhoto
     email = VCARD.hasEmail
     lattes = OPENCIN.lattes
     descricao = DBO.abstract
     
-    @RdfsClass(OPENCIN.FullProfessor, "https://www.dbacademic.tech/professor/")
+    @RdfsClass(DBO.Professor, "https://www.dbacademic.tech/resource/")
     @BNamespace('foaf', FOAF)
     @BNamespace('cin', OPENCIN)
     @BNamespace('owl', OWL)
     @BNamespace('vcard', VCARD)
     @BNamespace('dbo', DBO)
+    @BNamespace('org', ORG)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
         self.siape = Literal(dict["siape"])
-        self.id = str(dict["siape"])
+        self.id = str(dict["id"])
         if "formacao" in dict:
             self.formacao = Literal(dict["formacao"])
         if "sameas" in dict:
@@ -108,65 +124,106 @@ class Docente ():
 
 class Unidade ():
 
-    nome = OPENCIN.name
+    nome = FOAF.name
     sameas = OWL.sameas
+    diretor = AIISO.responsibleFor
+    code= AIISO.code
 
      # unidade ? ou subunidade
-    @RdfsClass(OPENCIN.Center, "https://www.dbacademic.tech/")   
+    @RdfsClass(AIISO.Center, "https://www.dbacademic.tech/resource/")   
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('owl', OWL)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
+        self.code = dict["code"]
         self.id = str(dict["id"])
         if "sameas" in dict:
             self.sameas = URIRef(dict["sameas"])
+        if "diretor" in dict:
+            self.diretor = URIRef(dict["diretor"])
 
+class Subunidade ():
 
+    nome = FOAF.name
+    sameas = OWL.sameas
+    chefe = AIISO.responsibleFor
+    unidade = AIISO.part_of
+    code= AIISO.code
+
+     # unidade ? ou subunidade
+    @RdfsClass(AIISO.Department, "https://www.dbacademic.tech/resource/")   
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('owl', OWL)
+    @BNamespace('aiiso', AIISO)
+    def __init__(self, dict):
+        self.nome = Literal(dict["nome"])
+        self.id = str(dict["id"])
+        self.code = dict["code"]
+        if "sameas" in dict:
+            self.sameas = URIRef(dict["sameas"])
+        if "unidade" in dict:
+            self.unidade = URIRef(dict["unidade"])
 
 class Discente ():
 
     nome = FOAF.name
-    curso = OPENCIN.belongsA
+    curso = DBACAD.isStudying
+    code= DC.identifier
 
 
-    @RdfsClass(OPENCIN.Student, "https://www.dbacademic.tech/student/")
+    @RdfsClass(OPENCIN.Student, "https://www.dbacademic.tech/resource/")
     @BNamespace('foaf', FOAF)
     @BNamespace('cin', OPENCIN)
+    @BNamespace('aiiso', AIISO)
+    @BNamespace('dc', DC)
+    @BNamespace('dbacad', DBACAD)
     def __init__(self, dict ):
         self.nome = Literal(dict["nome"])
-        self.id = str(dict["id"])
+        self.id = dict["id"]
+        self.code = dict["code"]
         if "curso" in dict:
             self.curso = URIRef(dict["curso"])
 
 class GrupoPesquisa ():
 
 
-    nome = OPENCIN.name
-    area = OPENCIN.knowledgeArea
-    university = OPENCIN.University
-    coordenador = OPENCIN.hasCoordinator
+    nome = FOAF.name
+    area = OPENUAI.hasKnowledgeArea
+    university = AIISO.responsibilityOf
+    coordenador = AIISO.responsibilityOf
 
-    @RdfsClass(OPENCIN.researchGroup, "https://www.dbacademic.tech/researchgroup/")
-    @BNamespace('dc', DC)
+    @RdfsClass(AIISO.ResearchGroup, "https://www.dbacademic.tech/resource/")
+    @BNamespace('foaf', FOAF)
+    @BNamespace('cin', OPENCIN)
+    @BNamespace('aiiso', AIISO)
     def __init__(self, dict):
         self.id = dict["id"]
         self.nome = Literal (dict["nome"])
         self.area = Literal (dict["area"])
         self.coordenador = URIRef(dict["coordenador"])
+        self.university = URIRef(dict["university"])
+
   
 class Monografia ():
 
     title = DC.title
     autor = DC.creator
-    curso = DC.publisher
+    curso = BIBO.issuer
     orientador = DC.contributor
 
-    @RdfsClass(BIBO.Thesis, "https://www.dbacademic.tech/thesis/")
+    @RdfsClass(BIBO.Report, "https://www.dbacademic.tech/resource/")
     @BNamespace('dc', DC)
     @BNamespace('bibo', BIBO)
     def __init__(self, dict ):
         self.title = Literal(dict["titulo"])
         self.id = dict["id"]
-        #self.curso = Literal ("curso")
-        #self.curso = URIRef("https://sigaa.ufma.br/sigaa/public/curso/portal.jsf?id=" + str(curso))
-        #self.autor = Literal("autor")
-        #self.orientador = Literal("orientador")
-        #self.orientador = URIRef("https://sigaa.ufma.br/sigaa/public/docente/portal.jsf?siape=" + str(orientador))
+        if "curso" in dict:
+            self.curso = URIRef(dict["curso"])
+        if "autor" in dict:
+            #self.autor = URIRef(dict["autor"])
+            self.autor = Literal(dict["autor"])
+        if "orientador" in dict:
+            self.orientador = URIRef(dict["orientador"])        

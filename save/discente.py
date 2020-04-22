@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma
+from utils import dados_sigaa, dados_ufma, hashcode
 
 
 serialize_rdf_discentes = {
@@ -12,14 +12,15 @@ serialize_rdf_discentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
-                    "id": lambda d: "ufrn_" + d["matricula"],
-                    "curso": lambda d: "https://www.dbacademic.tech/course/ufrn_" + str(d["id_curso"])
+                    "id": lambda d: hashcode ("ufrn", d["matricula"]),
+                    "code" : "matricula",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_curso"]))
             },
 
-            "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=a55aef81-e094-4267-8643-f283524e3dd7&limit=5"),
+            "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=a55aef81-e094-4267-8643-f283524e3dd7"),
             
             "rdf_path" : "rdf/discentes_ufrn.rdf"
         },
@@ -28,13 +29,28 @@ serialize_rdf_discentes = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
-                    "id": lambda d: "ufpi_" + d["matricula"],
-                    "curso": lambda d: "https://www.dbacademic.tech/course/ufpi_" + str(d["id_curso"])
+                    "id": lambda d: hashcode ("ufpi", d["matricula"]),
+                    "code" : "matricula",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi", str (d["id_curso"]))
             },
 
-            "data" : lambda :  dados_sigaa("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b&limit=5"),
+            "data" : lambda :  dados_sigaa("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b"),
             
             "rdf_path" : "rdf/discentes_ufpi.rdf"
+        },
+
+        { ## ufma
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d: hashcode ("ufma", d["matricula"]),
+                    "code" : "matricula",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", str (d["codigo_curso"]))
+            },
+
+            "data" : lambda :  dados_ufma("https://dados-ufma.herokuapp.com/api/v01/discente/"),
+            
+            "rdf_path" : "rdf/discentes_ufma.rdf"
         },
 
     ]
