@@ -27,7 +27,7 @@ serialize_rdf_monografia = {
          { ## ufma
             "toSave" : True,
             "mapper" : {
-                    "titulo" : "titulo", 
+                    "titulo" : lambda d:  d["titulo"].encode('utf-8', 'xmlcharrefreplace'), 
                     "id": lambda d : hashcode( "ufma", str(d["codigo"]) ),
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["codigo_curso"])),
                     "orientador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["siape_orientador"])),

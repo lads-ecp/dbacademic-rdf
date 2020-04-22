@@ -1,2 +1,4 @@
 rdf
-.vscode
+.vscode/
+.vscode/settings.json
+
