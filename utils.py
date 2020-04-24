@@ -1,6 +1,8 @@
 
 import requests
 import hashlib
+import string
+import re
 
 def dados_sigaa (url):
     data = requests.get(url+"&limit=1000000").json()
@@ -15,3 +17,27 @@ def dados_ufma (url):
 
 def hashcode (university, code):
   return hashlib.md5((university+code).encode()).hexdigest()
+
+s ="Estudo Comparativo de Estratégias de Controle Aplicadas a um Gerador Síncrono"
+
+def removeNonUTF8 (s):
+    #return bytes(s, 'utf-8').decode('utf-8', 'ignore')
+    return ''.join(x for x in s if x in string.printable)
+    #return str(bytes(s, 'utf-8').decode('cp1252').encode('utf-8'))
+
+def remove_unicode(string_data):
+    """ (str|unicode) -> (str|unicode)
+
+    recovers ascii content from string_data
+    """
+    if string_data is None:
+        return string_data
+
+    if isinstance(string_data, bytes):
+        string_data = bytes(string_data.decode('ascii', 'ignore'))
+    else:
+        string_data = string_data.encode('ascii', 'ignore')
+
+    remove_ctrl_chars_regex = re.compile(r'[^\x20-\x7e]')
+
+

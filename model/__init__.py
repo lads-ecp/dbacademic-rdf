@@ -126,7 +126,7 @@ class Unidade ():
 
     nome = FOAF.name
     sameas = OWL.sameas
-    diretor = AIISO.responsibleFor
+    diretor = AIISO.responsibilityOf
     code= AIISO.code
 
      # unidade ? ou subunidade
@@ -148,7 +148,7 @@ class Subunidade ():
 
     nome = FOAF.name
     sameas = OWL.sameas
-    chefe = AIISO.responsibleFor
+    chefe = AIISO.responsibilityOf
     unidade = AIISO.part_of
     code= AIISO.code
 
@@ -170,7 +170,7 @@ class Subunidade ():
 class Discente ():
 
     nome = FOAF.name
-    curso = DBACAD.isStudying
+    curso = OPENCIN.isMemberOf
     code= DC.identifier
 
 

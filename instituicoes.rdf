@@ -1,0 +1,237 @@
+
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dbo="http://dbpedia.org/ontology/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:prov="http://www.w3.org/ns/prov#"
+	xmlns:dbp="http://dbpedia.org/property/"
+	xmlns:ns8="http://purl.org/linguistics/gold/" >
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Pampa">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_the_State_of_Rio_de_Janeiro">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Goiás">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Bahia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Pernambuco">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Juiz_de_Fora">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Paraná">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Santa_Catarina">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Santa_Maria">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Viçosa">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_ABC">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Health_Sciences_of_Porto_Alegre">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Mato_Grosso_do_Sul">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Pelotas">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Technology_Owerri">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Faculdade_de_Medicina_da_Universidade_Federal_de_Minas_Gerais">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Amapá">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Fronteira_Sul">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Grande_Dourados">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Roraima">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Sergipe">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Vale_do_São_Francisco">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Alfenas">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Espírito_Santo">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Ouro_Preto">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Pará">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Recôncavo_da_Bahia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Technology_Minna">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Itajubá">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Mato_Grosso">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Maranhão">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Technology_–_Paraná">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Tocantins">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Uberlândia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Minas_Gerais">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Sul">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Rio_de_Janeiro">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_São_Carlos">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Acre">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Amazonas">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Paraíba">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Rio_Grande">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Rondônia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Triângulo_Mineiro">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Western_Bahia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Lavras">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Southern_Bahia">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_São_João_del-Rei">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Campina_Grande">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Alagoas">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_São_Paulo">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Center_for_Marine_Studies">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Southern_and_Southeastern_Pará">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Vales_do_Jequitinhonha_e_Mucuri">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+<rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Western_Pará">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+</rdf:RDF>

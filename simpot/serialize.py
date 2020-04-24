@@ -21,7 +21,7 @@ def serialize_to_rdf (data, type_class ):
     return (graph(rdf)).serialize().decode()
 
 def serialize_to_rdf_file (data, type_class, path ):
-    f = open(path,"w+")
+    f = open(path,"w+",encoding="utf-8") 
     f.write (serialize_to_rdf(data, type_class))
     f.close()
 

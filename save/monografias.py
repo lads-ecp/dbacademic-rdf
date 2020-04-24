@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, hashcode, removeNonUTF8
 
 
 
@@ -15,7 +15,7 @@ serialize_rdf_monografia = {
         { ## ufrn
             "toSave" : True,
             "mapper" : {
-                    "titulo" : "titulo", 
+                    "titulo" : lambda d:  removeNonUTF8 (d["titulo"]), 
                     "id": lambda d : hashcode( "ufrn", str(d["_id"])),
                     "autor": "nome_autor"
             },
@@ -27,7 +27,7 @@ serialize_rdf_monografia = {
          { ## ufma
             "toSave" : True,
             "mapper" : {
-                    "titulo" : lambda d:  d["titulo"].encode('utf-8', 'xmlcharrefreplace'), 
+                    "titulo" : lambda d:   (d["titulo"]), 
                     "id": lambda d : hashcode( "ufma", str(d["codigo"]) ),
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["codigo_curso"])),
                     "orientador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["siape_orientador"])),
