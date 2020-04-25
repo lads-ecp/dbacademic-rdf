@@ -101,6 +101,20 @@ serialize_rdf_cursos = {
             "rdf_path" : "rdf/cursos_ufma.rdf"
         },
 
+        { ## ufpel
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome_curso", 
+                    "code" : "cod_curso",
+                    "id": lambda d: hashcode ( "ufpel", str(d["cod_curso"])),
+                    "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufpel", str (d["cod_unidade"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Pelotas",        
+            },
+
+            "data" : lambda : dados_sigaa("http://dados.ufpel.edu.br/api/action/datastore_search?resource_id=335bed66-d18b-40e1-9ac1-0db6d4f50a99"),
+            
+            "rdf_path" : "rdf/cursos_ufpel.rdf"
+        }
     ]
 }
 
