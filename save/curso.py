@@ -142,6 +142,20 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_sigaa("http://ckan.unifesspa.edu.br/api/action/datastore_search?resource_id=9ee93dc4-9398-43fc-91c4-1173b9378fed"),
             
             "rdf_path" : "rdf/cursos_unifesspa.rdf"
+        },
+
+        { ## ufv
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code" : "_id",
+                    "id": lambda d: hashcode ( "ufv", str(d["_id"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Vi%C3%A7osa",        
+            },
+
+            "data" : lambda : dados_sigaa("http://dados.ufv.br/api/3/action/datastore_search?resource_id=e569f2e0-8ba0-4922-b715-9928980ae9f2"),
+            
+            "rdf_path" : "rdf/cursos_ufv.rdf"
         }
     ]
 }
