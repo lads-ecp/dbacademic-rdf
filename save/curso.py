@@ -114,6 +114,20 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_sigaa("http://dados.ufpel.edu.br/api/action/datastore_search?resource_id=335bed66-d18b-40e1-9ac1-0db6d4f50a99"),
             
             "rdf_path" : "rdf/cursos_ufpel.rdf"
+        },
+
+        { ## ufca
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome_curso", 
+                    "code" : "_id",
+                    "id": lambda d: hashcode ( "ufpel", str(d["_id"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Universidade_Federal_do_Cariri",        
+            },
+
+            "data" : lambda : dados_sigaa("https://dados.ufca.edu.br/api/action/datastore_search?resource_id=5f31e620-a366-42c9-a54c-96da666c93b7"),
+            
+            "rdf_path" : "rdf/cursos_ufca.rdf"
         }
     ]
 }
