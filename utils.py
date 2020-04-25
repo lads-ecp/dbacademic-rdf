@@ -15,8 +15,8 @@ def dados_ufma (url):
     return data["data"]
 
 
-def hashcode (university, code):
-  return hashlib.md5((university+code).encode()).hexdigest()
+def hashcode (university, resource,  code):
+  return hashlib.md5((university+resource+code).encode()).hexdigest()
 
 s ="Estudo Comparativo de Estratégias de Controle Aplicadas a um Gerador Síncrono"
 

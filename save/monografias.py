@@ -16,7 +16,7 @@ serialize_rdf_monografia = {
             "toSave" : True,
             "mapper" : {
                     "titulo" : lambda d:  removeNonUTF8 (d["titulo"]), 
-                    "id": lambda d : hashcode( "ufrn", str(d["_id"])),
+                    "id": lambda d : hashcode( "ufrn", "monografias", str(d["_id"])),
                     "autor": "nome_autor"
             },
 
@@ -28,9 +28,9 @@ serialize_rdf_monografia = {
             "toSave" : True,
             "mapper" : {
                     "titulo" : lambda d:   (d["titulo"]), 
-                    "id": lambda d : hashcode( "ufma", str(d["codigo"]) ),
-                    "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["codigo_curso"])),
-                    "orientador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["siape_orientador"])),
+                    "id": lambda d : hashcode( "ufma",  "monografias", str(d["codigo"]) ),
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", "curso", str (d["codigo_curso"])),
+                    "orientador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", "docente", str (d["siape_orientador"])),
                     #"autor": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["codigo_curso"])),
                     "autor": "discente"
                     

@@ -19,12 +19,12 @@ serialize_rdf_docentes = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
-                    "id" : lambda d: hashcode ("ufrn", d["siape"]),
+                    "id" : lambda d: hashcode ("ufrn", "docente", d["siape"]),
                     "siape": "siape",
                     "formacao" : "formacao",
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"],
                     #"sexo": lambda d: sexo_dict[d["sexo"]],
-                    "unidade": lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?id=" + d["id_unidade_lotacao"]
+                    "unidade": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufrn", "departamento", str (d["id_unidade_lotacao"]))  
             },
 
             "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=ff0a457e-76fa-4aca-ad99-48aebd7db070"),
@@ -38,7 +38,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome_servidor", 
                     "siape": "vinculo_servidor",
-                    "id" : lambda d: hashcode ("unifespa", d["vinculo_servidor"]),
+                    "id" : lambda d: hashcode ("unifespa",  "docente", d["vinculo_servidor"]),
                     "formacao": "escolaridade",
                     "sameas" : lambda d: "https://sigaa.unifesspa.edu.br/sigaa/public/docente/portal.jsf?siape=" + d["vinculo_servidor"]
             },
@@ -54,7 +54,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
-                    "id" : lambda d: hashcode ("ufpi", d["siape"]),
+                    "id" : lambda d: hashcode ("ufpi",  "docente", d["siape"]),
                     "sameas" : lambda d: "https://sigaa.ufpi.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"]
             },
 
@@ -68,7 +68,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
-                    "id" : lambda d: hashcode ("ufsj", d["siape"]),
+                    "id" : lambda d: hashcode ("ufsj",  "docente", d["siape"]),
                     "sameas" : lambda d: "https://sig.ufsj.edu.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"]
             },
 
@@ -83,7 +83,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
-                    "id" : lambda d: hashcode ("ufma", str(d["siape"])),
+                    "id" : lambda d: hashcode ("ufma",  "docente", str(d["siape"])),
                     "telefone" : "telefone",
                     "imagem" : "urlimg",
                     "email" : "email",

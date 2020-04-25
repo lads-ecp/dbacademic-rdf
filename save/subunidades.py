@@ -15,9 +15,9 @@ serialize_rdf_subunidades = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome_unidade", 
-                    "id": lambda d : hashcode ("ufrn",  d["id_unidade"]),
+                    "id": lambda d : hashcode ("ufrn", "departamento", d["id_unidade"]),
                     "code" : "id_unidade",
-                    "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", d["id_unidade_responsavel"]),
+                    "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "centro", d["id_unidade_responsavel"]),
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"]),                    
             },
 
@@ -29,7 +29,7 @@ serialize_rdf_subunidades = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
-                    "id": lambda d : hashcode ("ufrn",  d["codigo"]),
+                    "id": lambda d : hashcode ("ufma", "departamento", d["codigo"]),
                     "code" : "codigo",
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/departamento/portal.jsf?id=" + str(d["codigo"]),                    
             },

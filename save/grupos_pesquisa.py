@@ -17,10 +17,10 @@ serialize_rdf_grupopesquisa = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "base_pesquisa", 
-                    "id": lambda d : hashcode ("ufrn", str(d["codigo"])),
+                    "id": lambda d : hashcode ("ufrn", "grupopesquisa", str(d["codigo"])),
                     "area" : "area_conhecimento_cnpq",
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
-                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_coordenador"])),
+                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
             "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=09951a7c-46c4-4d1b-a537-2e50caa070c4"),

@@ -15,9 +15,9 @@ serialize_rdf_discentes = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
-                    "id": lambda d: hashcode ("ufrn", d["matricula"]),
+                    "id": lambda d: hashcode ("ufrn", "discente", d["matricula"]),
                     "code" : "matricula",
-                    "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_curso"]))
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "curso", str (d["id_curso"]))
             },
 
             "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=a55aef81-e094-4267-8643-f283524e3dd7"),
@@ -29,9 +29,9 @@ serialize_rdf_discentes = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
-                    "id": lambda d: hashcode ("ufpi", d["matricula"]),
+                    "id": lambda d: hashcode ("ufpi",  "discente", d["matricula"]),
                     "code" : "matricula",
-                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi", str (d["id_curso"]))
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi","curso", str (d["id_curso"]))
             },
 
             "data" : lambda :  dados_sigaa("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b"),
@@ -43,9 +43,9 @@ serialize_rdf_discentes = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
-                    "id": lambda d: hashcode ("ufma", d["matricula"]),
+                    "id": lambda d: hashcode ("ufma", "discente", d["matricula"]),
                     "code" : "matricula",
-                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", str (d["codigo_curso"]))
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", "curso", str (d["codigo_curso"]))
             },
 
             "data" : lambda :  dados_ufma("https://dados-ufma.herokuapp.com/api/v01/discente/"),

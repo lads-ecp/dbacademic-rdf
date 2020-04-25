@@ -22,12 +22,12 @@ serialize_rdf_cursos = {
             "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
-                    "id": lambda d: hashcode ( "ufrn", d["id_curso"]),
+                    "id": lambda d: hashcode ( "ufrn","curso", d["id_curso"]),
                     "code" : "id_curso",
                     "area" : "area_conhecimento",
-                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_coordenador"])),
+                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
-                    "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", str (d["id_unidade_responsavel"])),
+                    "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn","departamento", str (d["id_unidade_responsavel"])),
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/curso/portal.jsf?id=" + d["id_curso"],
             },
 
@@ -41,7 +41,7 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "Nome Curso", 
                     "code" : lambda d: d["website"][ d["website"].index("?id=") +4: d["website"].index("&lc") ],
-                    "id": lambda d: hashcode ( "ufpi", d["website"][ d["website"].index("?id=") +4: d["website"].index("&lc") ]),
+                    "id": lambda d: hashcode ( "ufpi", "curso",  d["website"][ d["website"].index("?id=") +4: d["website"].index("&lc") ]),
                     "area" : "Area",
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Piaui",
                     "sameas" : "website",
@@ -58,7 +58,7 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "nome", 
                     "code" : "id_curso",
-                    "id": lambda d: hashcode ( "ufpb", str (d["id_curso"])),
+                    "id": lambda d: hashcode ( "ufpb",  "curso", str (d["id_curso"])),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Para%C3%ADba",
                     "sameas" : lambda d: "https://sigaa.ufpbbr/sigaa/public/curso/portal.jsf?id=" + str(d["id_curso"]),
                     
@@ -74,7 +74,7 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "curso", 
                     "code" : "id",
-                    "id": lambda d: hashcode ( "ufms", d["id"]),
+                    "id": lambda d: hashcode ( "ufms",  "curso", d["id"]),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Mato_Grosso_do_Sul",
                     
             },
@@ -89,8 +89,8 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "nome", 
                     "code" : "codigo",
-                    "id": lambda d: hashcode ( "ufma", d["codigo"]),
-                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", str (d["coordenador"])),
+                    "id": lambda d: hashcode ( "ufma",  "curso", d["codigo"]),
+                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", "docente", str (d["coordenador"])),
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/curso/portal.jsf?id=" + d["codigo"],
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Maranhao",
                     
