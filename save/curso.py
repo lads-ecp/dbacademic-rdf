@@ -121,13 +121,27 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "nome_curso", 
                     "code" : "_id",
-                    "id": lambda d: hashcode ( "ufpel", str(d["_id"])),
+                    "id": lambda d: hashcode ( "ufca", str(d["_id"])),
                     "university" : lambda d: "http://dbpedia.org/page/Universidade_Federal_do_Cariri",        
             },
 
             "data" : lambda : dados_sigaa("https://dados.ufca.edu.br/api/action/datastore_search?resource_id=5f31e620-a366-42c9-a54c-96da666c93b7"),
             
             "rdf_path" : "rdf/cursos_ufca.rdf"
+        },
+        
+        { ## unifesspa
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome_curso", 
+                    "code" : "_id",
+                    "id": lambda d: hashcode ( "unifesspa", str(d["_id"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Southern_and_Southeastern_Par%C3%A1",        
+            },
+
+            "data" : lambda : dados_sigaa("http://ckan.unifesspa.edu.br/api/action/datastore_search?resource_id=9ee93dc4-9398-43fc-91c4-1173b9378fed"),
+            
+            "rdf_path" : "rdf/cursos_unifesspa.rdf"
         }
     ]
 }
