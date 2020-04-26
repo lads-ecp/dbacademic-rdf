@@ -21,4 +21,4 @@ def dados_csv (url):
     file = requests.get(url).text
     reader = csv.DictReader(io.StringIO(file))
     data = json.dumps(list(reader))
-    return data
+    return json.loads(data)
