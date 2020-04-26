@@ -1,5 +1,5 @@
 
-import requests
+import requests, csv, json, io
 import hashlib
 
 def dados_sigaa (url):
@@ -14,4 +14,11 @@ def dados_ufma (url):
 
 
 def hashcode (university, code):
-  return hashlib.md5((university+code).encode()).hexdigest()
+    return hashlib.md5((university+code).encode()).hexdigest()
+
+
+def dados_csv (url):
+    file = requests.get(url).text
+    reader = csv.DictReader(io.StringIO(file))
+    data = json.dumps(list(reader))
+    return data
