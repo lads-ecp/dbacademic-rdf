@@ -170,7 +170,22 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_sigaa("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=6096d836-9160-43ae-bbbd-8712d4b202ca"),
             
             "rdf_path" : "rdf/cursos_ufcspa.rdf"
-        }
+        },
+
+        { ## ufsj
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome_curso", 
+                    "code" : "codCurso",
+                    "id": lambda d: hashcode ( "ufsj", str(d["codCurso"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_S%C3%A3o_Jo%C3%A3o_del-Rei",        
+            },
+
+            "data" : lambda : dados_sigaa("http://dados.ufsj.edu.br/api/action/datastore_search?resource_id=15625dc7-acc2-45e8-9189-46e4362c013f"),
+            
+            "rdf_path" : "rdf/cursos_ufsj.rdf"
+        },
+
     ]
 }
 
