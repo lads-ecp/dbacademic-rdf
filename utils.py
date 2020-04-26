@@ -3,8 +3,12 @@ import requests
 import hashlib
 import string
 import re
+import csv
+import io
+import json
 
-def dados_sigaa (url):
+
+def dados_ckan (url):
     data = requests.get(url+"&limit=1000000").json()
     print (len (data["result"]["records"] ))
     return data["result"]["records"]
@@ -40,4 +44,12 @@ def remove_unicode(string_data):
 
     remove_ctrl_chars_regex = re.compile(r'[^\x20-\x7e]')
 
+
+def dados_csv (url):
+    r = requests.get(url)
+    encoding = r.encoding or "Utf-8"
+    file =  (r.text).encode().decode( 'utf-8')
+    reader = csv.DictReader(io.StringIO(file))
+    data = json.dumps(list(reader))
+    return json.loads(data)
 

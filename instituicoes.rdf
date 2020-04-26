@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-16" ?>
 <rdf:RDF
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -133,6 +133,12 @@
 <rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Maranhão">
     <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
   </rdf:Description>
+
+  <rdf:Description rdf:about="http://dbpedia.org/resource/Federal_Institute_of_Maranhao">
+    <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />
+  </rdf:Description>
+
+  
 
 <rdf:Description rdf:about="http://dbpedia.org/resource/Federal_University_of_Technology_–_Paraná">
     <rdf:type rdf:resource="http://dbpedia.org/ontology/EducationalInstitution" />

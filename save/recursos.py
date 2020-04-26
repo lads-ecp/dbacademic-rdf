@@ -1,0 +1,3 @@
+
+CURSO = "curso"
+DEPARTAMENTO = "departamento"

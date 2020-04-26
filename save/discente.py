@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_ckan, dados_ufma, hashcode
 
 
 serialize_rdf_discentes = {
@@ -20,7 +20,7 @@ serialize_rdf_discentes = {
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "curso", str (d["id_curso"]))
             },
 
-            "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=a55aef81-e094-4267-8643-f283524e3dd7"),
+            "data" : lambda :  dados_ckan("http://dados.ufrn.br/api/action/datastore_search?resource_id=a55aef81-e094-4267-8643-f283524e3dd7"),
             
             "rdf_path" : "rdf/discentes_ufrn.rdf"
         },
@@ -34,7 +34,7 @@ serialize_rdf_discentes = {
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi","curso", str (d["id_curso"]))
             },
 
-            "data" : lambda :  dados_sigaa("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b"),
+            "data" : lambda :  dados_ckan("https://dados.ufpi.br/api/action/datastore_search?resource_id=20df1fac-f3f1-4344-a514-655bd251db2b"),
             
             "rdf_path" : "rdf/discentes_ufpi.rdf"
         },
