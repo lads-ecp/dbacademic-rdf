@@ -186,6 +186,36 @@ serialize_rdf_cursos = {
             "rdf_path" : "rdf/cursos_ufsj.rdf"
         },
 
+        { ## uffs
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome_curso", 
+                    "code" : "cod_uffs",
+                    "id": lambda d: hashcode ( "uffs", str(d["cod_uffs"])),
+                    "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "uffs", str (d["coord_curso"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Fronteira_Sul",        
+            },
+
+            "data" : lambda : dados_sigaa("https://dados.uffs.edu.br/api/3/action/datastore_search?resource_id=c35a0c22-fe50-4d7c-8339-7f253fe7e977"),
+            
+            "rdf_path" : "rdf/cursos_uffs.rdf"
+        },
+
+        { ## unirio
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "NOME_UNIDADE", 
+                    "code" : "COD_CURSO",
+                    "id": lambda d: hashcode ( "unirio", str(d["COD_CURSO"])),
+                    "area": "DESCR_AREA_CONHEC",
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_the_State_of_Rio_de_Janeiro",        
+            },
+
+            "data" : lambda : dados_csv("http://dados.unirio.br/dataset/bfc6f424-6137-4feb-9c4e-5512f8821415/resource/83d0d21f-63e1-4295-959a-1683e6a21937/download/cursosunirio2.csv"),
+            
+            "rdf_path" : "rdf/cursos_unirio.rdf"
+        }
+
     ]
 }
 
