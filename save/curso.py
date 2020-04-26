@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, dados_csv, hashcode
 
 import requests
 
@@ -156,6 +156,20 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_sigaa("http://dados.ufv.br/api/3/action/datastore_search?resource_id=e569f2e0-8ba0-4922-b715-9928980ae9f2"),
             
             "rdf_path" : "rdf/cursos_ufv.rdf"
+        },
+
+        { ## ufcspa
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "NOME_CURSO_DIPLOMA", 
+                    "code" : "_id",
+                    "id": lambda d: hashcode ( "ufcspa", str(d["_id"])),
+                    "university" : lambda d: "http://dbpedia.org/page/Federal_University_of_Health_Sciences_of_Porto_Alegre",        
+            },
+
+            "data" : lambda : dados_sigaa("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=6096d836-9160-43ae-bbbd-8712d4b202ca"),
+            
+            "rdf_path" : "rdf/cursos_ufcspa.rdf"
         }
     ]
 }
