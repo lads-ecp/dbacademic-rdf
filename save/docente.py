@@ -15,7 +15,7 @@ serialize_rdf_docentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "id" : lambda d: hashcode ("ufrn", d["siape"]),
@@ -33,7 +33,7 @@ serialize_rdf_docentes = {
 
 
         { ## unifespa
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome_servidor", 
                     "siape": "vinculo_servidor",
@@ -49,7 +49,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufpi
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -63,7 +63,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufsj
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -78,7 +78,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufma (DEPOIS MUDAR A API PARA RETORNAR NO MODELO)
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -98,7 +98,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufpel
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -112,7 +112,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufms
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "_id",
@@ -125,7 +125,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufv
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
