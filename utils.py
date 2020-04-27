@@ -14,7 +14,7 @@ def dados_ufma (url):
 
 
 def hashcode (university, code):
-    return hashlib.md5((university+code).encode()).hexdigest()
+    return hashlib.md5((university+str(code)).encode()).hexdigest()
 
 
 def dados_csv (url):
