@@ -112,7 +112,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufms
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "_id",
@@ -125,7 +125,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufv
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -135,6 +135,19 @@ serialize_rdf_docentes = {
             "data" : lambda : dados_sigaa("http://dados.ufv.br/api/3/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a949a903-9536-4d20-87e5-cca5c217771a%22%20WHERE%20categoria%20LIKE%20%27DOCENTE%25%27"),
             
             "rdf_path" : "rdf/docentes_ufv.rdf"
+        },
+        
+        { ## ufcspa
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "NOME_FUNCIONARIO", 
+                    "siape": "_id",
+                    "id" : lambda d: hashcode ("ufcspa", d["_id"])
+            },
+
+            "data" : lambda : dados_sigaa("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=4286a4d5-9de7-4f88-bb37-f0f064415118&q=PROFESSOR"),
+            
+            "rdf_path" : "rdf/docentes_ufcspa.rdf"
         },
 
     ]
