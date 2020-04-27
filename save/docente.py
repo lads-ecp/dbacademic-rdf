@@ -1,7 +1,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, hashcode, dados_iffar
 
 sexo_dict = {
     'F' : 'Male',
@@ -15,7 +15,7 @@ serialize_rdf_docentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "id" : lambda d: hashcode ("ufrn", d["siape"]),
@@ -33,7 +33,7 @@ serialize_rdf_docentes = {
 
 
         { ## unifespa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_servidor", 
                     "siape": "vinculo_servidor",
@@ -49,7 +49,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufpi
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -63,7 +63,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufsj
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -78,7 +78,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufma (DEPOIS MUDAR A API PARA RETORNAR NO MODELO)
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -98,7 +98,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufpel
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -112,7 +112,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufms
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "_id",
@@ -125,7 +125,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufv
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -138,7 +138,7 @@ serialize_rdf_docentes = {
         },
         
         { ## ufcspa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "NOME_FUNCIONARIO", 
                     "siape": "_id",
@@ -148,6 +148,22 @@ serialize_rdf_docentes = {
             "data" : lambda : dados_sigaa("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=4286a4d5-9de7-4f88-bb37-f0f064415118&q=PROFESSOR"),
             
             "rdf_path" : "rdf/docentes_ufcspa.rdf"
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "id_servidor",
+                    "id" : lambda d: hashcode ("iffar", d["id_servidor"]),
+                    "formacao": lambda d: d["links"]["id_formacao"]["title"].split(':')[1],
+                    "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", str (d["id_unidade"])),
+                    "sameas" : lambda d: "http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_servidor=" + str(d["id_servidor"])
+            },
+
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_categoria=1"),
+            
+            "rdf_path" : "rdf/docentes_iffar.rdf"
         },
 
     ]
