@@ -98,6 +98,20 @@ serialize_rdf_docentes = {
             "rdf_path" : "rdf/docentes_ufma.rdf"
         },
 
+        { ## ufpel
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "siape",
+                    "formacao": "titulacao",
+                    "id" : lambda d: hashcode ("ufpel", d["siape"])
+            },
+
+            "data" : lambda : dados_sigaa("http://dados.ufpel.edu.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22b63c24da-d96d-4ee2-bdaf-f7a8c37f0007%22%20WHERE%20categoria%20LIKE%20%27Docente%27"),
+            
+            "rdf_path" : "rdf/docentes_ufpel.rdf"
+        },
+
     ]
 }
 
