@@ -46,9 +46,12 @@ def remove_unicode(string_data):
 
 
 def dados_csv (url):
-    r = requests.get(url)
+    r = requests.get(url, verify=False)
     encoding = r.encoding or "Utf-8"
-    file =  (r.text).encode().decode( 'utf-8')
+    #print (r.text)
+    #print (encoding)
+    #r.text.replace(";",",")
+    file =  (r.text).encode(enconding).decode( 'utf-8')
     reader = csv.DictReader(io.StringIO(file))
     data = json.dumps(list(reader))
     return json.loads(data)

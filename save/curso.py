@@ -165,7 +165,8 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "descricao", 
                     "code": "codigo",
-                    "id" : lambda d: hashcode ("ifma",  "curso", str(d["codigo"])),
+                    #"id" : lambda d: hashcode ("ifma",  "curso", str(d["codigo"])),
+                    "id" : lambda d: hashcode ("ifma",  "curso", str(d["descricao"]).upper()),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Maranhao",        
 
             }, 
@@ -284,6 +285,25 @@ serialize_rdf_cursos = {
             )),
             
             "rdf_path" : "rdf/cursos_ifms.rdf"
+        },
+
+
+        { ## ifs
+            "toSave" : False,  # nao deu certo
+            "mapper" : {
+                    "nome" : "Nome", 
+                    #"code": "codigo",
+                    #"id" : lambda d: hashcode ("ifma",  "curso", str(d["codigo"])),
+                    "id" : lambda d: hashcode ("ifs",  "curso", str(d["Nome"]).upper()),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Espirito_Santo",        
+
+            }, 
+
+            "data" :  lambda : list( filter (  lambda d: d["Grau"] and (d["Grau"] == "Bacharelado"  or d["Grau"] == "Tecnológico" ),
+                        dados_csv("http://dados.ifs.edu.br/dataset/cc7b829b-54fc-4c24-91cd-915fa81f98c1/resource/07271cc7-c229-496d-b6cc-da19119c425e/download/20-cursos.csv")
+                    )),
+            
+            "rdf_path" : "rdf/cursos_ifs.rdf"
         },
 
 

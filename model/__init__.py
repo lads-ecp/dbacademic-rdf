@@ -85,7 +85,8 @@ class Docente ():
     @BNamespace('org', ORG)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
-        self.siape = Literal(dict["siape"])
+        if "siape" in dict:
+            self.siape = Literal(dict["siape"])
         self.id = str(dict["id"])
         if "formacao" in dict:
             self.formacao = Literal(dict["formacao"])

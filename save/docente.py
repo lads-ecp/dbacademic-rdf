@@ -1,7 +1,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode
+from utils import dados_ckan, dados_ufma, hashcode, dados_csv
 import requests
 
 sexo_dict = {
@@ -134,7 +134,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ifpb
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "matricula",
@@ -149,6 +149,44 @@ serialize_rdf_docentes = {
             
             "rdf_path" : "rdf/docentes_ifpb.rdf"
         },
+
+
+           { ## ifms
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "servidor", 
+                    "siape": "matricula", # siape nao está completo
+                    "formacao" : "titulacao",
+                    "id" : lambda d: hashcode ("ifms",  "docente", str(d["servidor"]).upper()),
+                    #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
+
+            }, 
+
+            "data" :  lambda : list( filter (  lambda d:  d["categoria"] == "docente" ,
+                        dados_ckan("http://dados.ifms.edu.br/api/action/datastore_search?resource_id=4ccd20e6-703d-4682-a300-26a0e3788a4f")
+                    )),
+            
+            "rdf_path" : "rdf/docentes_ifms.rdf"
+        },
+
+        { ## ifs
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    #"formacao" : "titulacao",
+                    "id" : lambda d: hashcode ("ifs",  "docente", str(d["nome"]).upper()),
+                    #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
+
+            }, 
+
+            #http://dados.ifs.edu.br/dataset/f76b2c92-9141-4136-85b7-416c359bd350/resource/1bc4c608-ae33-4dc9-9e42-1b951aecc21b/download/docentes_superior_tecnico.csv
+            "data" :  lambda : list( filter (  lambda d:  d["Categoria"] == "Docente" ,
+                        dados_csv ("http://dados.ifs.edu.br/dataset/42a5d734-3149-4ca7-889e-fb6a73f96a18/resource/630bbf3d-1170-47b1-bb59-7d2876563c24/download/servidores.csv")
+                    )),
+            
+            "rdf_path" : "rdf/docentes_ifs.rdf"
+        },
+
 
     ]
 }
