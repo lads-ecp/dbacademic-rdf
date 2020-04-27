@@ -22,3 +22,8 @@ def dados_csv (url):
     reader = csv.DictReader(io.StringIO(file))
     data = json.dumps(list(reader))
     return json.loads(data)
+
+def dados_iffar(url):
+    data = requests.get(url).json()
+    print(data["info"])
+    return data["data"]
