@@ -8,7 +8,6 @@ sexo_dict = {
     'M' : 'Female'
 }
 
-
 serialize_rdf_docentes = {
 
     "classType" : Docente,
@@ -16,7 +15,7 @@ serialize_rdf_docentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "id" : lambda d: hashcode ("ufrn", d["siape"]),
@@ -34,7 +33,7 @@ serialize_rdf_docentes = {
 
 
         { ## unifespa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_servidor", 
                     "siape": "vinculo_servidor",
@@ -50,7 +49,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufpi
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -64,7 +63,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufsj
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -79,7 +78,7 @@ serialize_rdf_docentes = {
 
 
         { ## ufma (DEPOIS MUDAR A API PARA RETORNAR NO MODELO)
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -99,7 +98,7 @@ serialize_rdf_docentes = {
         },
 
         { ## ufpel
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
@@ -110,6 +109,32 @@ serialize_rdf_docentes = {
             "data" : lambda : dados_sigaa("http://dados.ufpel.edu.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22b63c24da-d96d-4ee2-bdaf-f7a8c37f0007%22%20WHERE%20categoria%20LIKE%20%27Docente%27"),
             
             "rdf_path" : "rdf/docentes_ufpel.rdf"
+        },
+
+        { ## ufms
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "_id",
+                    "id" : lambda d: hashcode ("ufms", str(d["_id"]))
+            },
+
+            "data" : lambda : dados_sigaa("https://dadosabertos.ufms.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a8ca7f30-0824-489b-8c70-faddcbd74f53%22%20WHERE%20cargo%20LIKE%20%27Professor%25%27"),
+            
+            "rdf_path" : "rdf/docentes_ufms.rdf"
+        },
+
+        { ## ufv
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "siape",
+                    "id" : lambda d: hashcode ("ufv", d["siape"])
+            },
+
+            "data" : lambda : dados_sigaa("http://dados.ufv.br/api/3/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a949a903-9536-4d20-87e5-cca5c217771a%22%20WHERE%20categoria%20LIKE%20%27DOCENTE%25%27"),
+            
+            "rdf_path" : "rdf/docentes_ufv.rdf"
         },
 
     ]
