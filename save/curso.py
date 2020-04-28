@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, dados_csv, hashcode
+from utils import dados_sigaa, dados_ufma, dados_csv, dados_iffar, hashcode
 
 import requests
 
@@ -214,7 +214,24 @@ serialize_rdf_cursos = {
             "data" : lambda : dados_csv("http://dados.unirio.br/dataset/bfc6f424-6137-4feb-9c4e-5512f8821415/resource/83d0d21f-63e1-4295-959a-1683e6a21937/download/cursosunirio2.csv"),
             
             "rdf_path" : "rdf/cursos_unirio.rdf"
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code" : "id_curso",
+                    "id": lambda d: hashcode ( "iffar", str(d["id_curso"])),
+                    "area": lambda d: d["links"]["id_area_curso"]["title"].split(":")[1].strip(),
+                    "unidade": lambda d: "https://sig.iffarroupilha.edu.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"]),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha"        
+            },
+
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/cursos.json?nivel=G"),
+            
+            "rdf_path" : "rdf/cursos_iffar.rdf"
         }
+
 
     ]
 }

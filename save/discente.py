@@ -12,7 +12,7 @@ serialize_rdf_discentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufrn", d["matricula"]),
@@ -26,7 +26,7 @@ serialize_rdf_discentes = {
         },
 
         { ## ufpi
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufpi", d["matricula"]),
@@ -40,7 +40,7 @@ serialize_rdf_discentes = {
         },
 
         { ## ufma
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "nome", 
                     "id": lambda d: hashcode ("ufma", d["matricula"]),
