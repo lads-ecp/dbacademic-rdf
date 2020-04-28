@@ -202,8 +202,10 @@ class GrupoPesquisa ():
     def __init__(self, dict):
         self.id = dict["id"]
         self.nome = Literal (dict["nome"])
-        self.area = Literal (dict["area"])
-        self.coordenador = URIRef(dict["coordenador"])
+        if "area" in dict:
+            self.area = Literal (dict["area"])
+        if "coordenador" in dict:
+            self.coordenador = URIRef(dict["coordenador"])
         self.university = URIRef(dict["university"])
 
   
