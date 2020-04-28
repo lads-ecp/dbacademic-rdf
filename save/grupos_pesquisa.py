@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, dados_iffar, hashcode
 
 
 
@@ -25,7 +25,23 @@ serialize_rdf_grupopesquisa = {
 
             "data" : lambda :  dados_sigaa("http://dados.ufrn.br/api/action/datastore_search?resource_id=09951a7c-46c4-4d1b-a537-2e50caa070c4"),
             "rdf_path" : "rdf/grupospesquisa_ufrn.rdf"
-        }
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d : hashcode ("iffar", str(d["id_grupo_pesquisa"])),
+                    "area" : lambda d: d["links"]["id_area_conhecimento_cnpq"]["title"].split(':')[1].strip(),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha",
+                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", str (d["links"]["id_coordenador"]["title"].split(":")[1].strip()))
+            },
+
+            "data" : lambda :  dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/grupos-pesquisa.json"),
+            "rdf_path" : "rdf/grupospesquisa_iffar.rdf"
+        },
+
+
 
     ]
 }
