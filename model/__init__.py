@@ -30,7 +30,7 @@ class Curso ():
 
     unidade = AIISO.responsibilityOf
 
-    university = AIISO.responsibilityOf
+    university = AIISO.part_of
 
     code= AIISO.code
 
@@ -204,7 +204,8 @@ class GrupoPesquisa ():
         self.id = dict["id"]
         self.nome = Literal (dict["nome"])
         self.area = Literal (dict["area"])
-        self.coordenador = URIRef(dict["coordenador"])
+        if "coordenador" in dict:
+            self.coordenador = URIRef(dict["coordenador"])
         self.university = URIRef(dict["university"])
 
   

@@ -187,6 +187,70 @@ serialize_rdf_docentes = {
             "rdf_path" : "rdf/docentes_ifs.rdf"
         },
 
+         { ## ufpel
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "siape",
+                    "formacao": "titulacao",
+                    "id" : lambda d: hashcode ("ufpel", "docente", d["siape"])
+            },
+
+            "data" : lambda : dados_ckan("http://dados.ufpel.edu.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22b63c24da-d96d-4ee2-bdaf-f7a8c37f0007%22%20WHERE%20categoria%20LIKE%20%27Docente%27"),
+            
+            "rdf_path" : "rdf/docentes_ufpel.rdf"
+        },
+
+        { ## ufms
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id" : lambda d: hashcode ("ufms", "docente", str(d["_id"]))
+            },
+
+            "data" : lambda : dados_ckan("https://dadosabertos.ufms.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a8ca7f30-0824-489b-8c70-faddcbd74f53%22%20WHERE%20cargo%20LIKE%20%27Professor%25%27"),
+            
+            "rdf_path" : "rdf/docentes_ufms.rdf"
+        },
+
+        { ## ufv
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "siape": "siape",
+                    "id" : lambda d: hashcode ("ufv", "docente", d["siape"])
+            },
+
+            "data" : lambda : dados_ckan("http://dados.ufv.br/api/3/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a949a903-9536-4d20-87e5-cca5c217771a%22%20WHERE%20categoria%20LIKE%20%27DOCENTE%25%27"),
+            
+            "rdf_path" : "rdf/docentes_ufv.rdf"
+        },
+        
+        { ## ufcspa
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "NOME_FUNCIONARIO", 
+                    "id" : lambda d: hashcode ("ufcspa", "docente", str(d["_id"]))
+            },
+
+            "data" : lambda : dados_ckan("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=4286a4d5-9de7-4f88-bb37-f0f064415118&q=PROFESSOR"),
+            
+            "rdf_path" : "rdf/docentes_ufcspa.rdf"
+        },
+
+        { ## iffar
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id" : lambda d: hashcode ("iffar", "docente", str(d["id_servidor"]))
+            },
+
+            "data" : lambda : requests.get("http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_categoria=1").json()["data"],
+            
+            "rdf_path" : "rdf/docentes_iffar.rdf"
+        },
+
+
 
     ]
 }

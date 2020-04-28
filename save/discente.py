@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode
+from utils import *
 
 import requests
 
@@ -56,7 +56,7 @@ serialize_rdf_discentes = {
 
 
         { ## ifpa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "Nome", 
                     "id": lambda d: hashcode ("ifpa", "discente", d["Matrícula"]),
@@ -98,6 +98,77 @@ serialize_rdf_discentes = {
             
             "rdf_path" : "rdf/discentes_ifma.rdf"
         },
+
+         { ## ifc
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d: hashcode ("ifc", "discente", d["nome"]),
+                    "code" : lambda d: hashcode ("ifc", "discente", d["nome"]),
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ifc", "curso", str (d["curso"].upper()))
+            },
+
+            "data" : lambda :  filter ( lambda d: d["nivel"] == "GRADUAÇÃO", 
+                    dados_csv ("http://dadosabertos.ifc.edu.br/pt_BR/dataset/d8dd8d6d-a4a7-444e-8b95-dba2095aa117/resource/c78fea00-2ba8-4df9-9b50-5bc1e7fb6075/download/discentes.csv")
+            ),
+            
+            "rdf_path" : "rdf/discentes_ifc.rdf"
+        },
+
+        { ## ifpb
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code": "matricula",
+                    "id" : "uuid",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + d["curso"]["uuid"] ,
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Paraiba",        
+
+            }, 
+
+            "data" :  lambda : 
+                        requests.get("https://dados.ifpb.edu.br/dataset/d02eb6b8-5745-4436-ae22-ef1c182897d9/resource/61f5a0ad-642d-4580-ab62-1110318d0eea/download/alunos.json").json()
+                    ,
+            
+            "rdf_path" : "rdf/discente_ifpb.rdf"
+        },
+
+        { ## ifms
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "curso", 
+                    "code" : "ra",
+                    "id": lambda d: hashcode ( "ifms", "discente", str(d["ra"])),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Mato_Grosso_do_Sul",        
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ifms", "curso", str (d["curso"].upper()))
+            },
+
+            "data" : lambda : list ( filter ( lambda d: d["nivel_do_curso"] == "TECNOLOGIA",
+                    dados_ckan("http://dados.ifms.edu.br/api/action/datastore_search?resource_id=b8b4dfdf-98ef-4d57-baff-75c163be6e9a"),
+            )),
+            
+            "rdf_path" : "rdf/discente_ifms.rdf"
+        },
+
+
+        { ## ifrn
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code": "matricula",
+                    "id" : lambda d: hashcode ("ifrn",  "discente", str(d["matricula"])),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Rio_Grande_do_Norte",        
+
+            }, 
+
+            "data" :  lambda :
+                        requests.get("https://dados.ifrn.edu.br/dataset/d5adda48-f65b-4ef8-9996-1ee2c445e7c0/resource/00efe66e-3615-4d87-8706-f68d52d801d7/download/dados_extraidos_recursos_alunos-da-instituicao.json").json()
+                ,
+            
+            "rdf_path" : "rdf/discentes_ifrn.rdf"
+        },
+
+        
 
     ]
 }

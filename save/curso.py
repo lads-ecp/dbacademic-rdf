@@ -200,7 +200,7 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "descricao", 
                     "code": "codigo",
-                    "id" : lambda d: hashcode ("ifpb",  "curso", str(d["codigo"])),
+                    "id" : "uuid", #lambda d: hashcode ("ifpb",  "curso", str(d["codigo"])),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Paraiba",        
 
             }, 
@@ -276,7 +276,8 @@ serialize_rdf_cursos = {
             "mapper" : {
                     "nome" : "curso", 
                     "code" : "_id",
-                    "id": lambda d: hashcode ( "ifms", "curso", str(d["_id"])),
+                    #"id": lambda d: hashcode ( "ifms", "curso", str(d["_id"])),
+                    "id": lambda d: hashcode ( "ifms", "curso", str(d["curso"])),
                     "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Mato_Grosso_do_Sul",        
             },
 

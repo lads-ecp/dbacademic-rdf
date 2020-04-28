@@ -19,6 +19,8 @@ def dados_ufma (url):
     return data["data"]
 
 
+
+
 def hashcode (university, resource,  code):
   return hashlib.md5((university+resource+code).encode()).hexdigest()
 
@@ -45,14 +47,13 @@ def remove_unicode(string_data):
     remove_ctrl_chars_regex = re.compile(r'[^\x20-\x7e]')
 
 
-def dados_csv (url):
+def dados_csv (url, delimiter=","):
     r = requests.get(url, verify=False)
     encoding = r.encoding or "Utf-8"
-    #print (r.text)
     #print (encoding)
-    #r.text.replace(";",",")
-    file =  (r.text).encode(enconding).decode( 'utf-8')
-    reader = csv.DictReader(io.StringIO(file))
+    file = r.text
+    file = file.encode(encoding).decode( 'utf-8')
+    reader = csv.DictReader(io.StringIO(file), delimiter=delimiter)
     data = json.dumps(list(reader))
     return json.loads(data)
 
