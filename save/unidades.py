@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, dados_iffar, hashcode
 
 import requests
 
@@ -41,6 +41,19 @@ serialize_rdf_unidades = {
 
             "data" : lambda : list ( filter ( lambda d: "siape_diretor" in d, requests.get("https://dados-live-ufma.herokuapp.com/api/v01/unidade/").json() )), # nao desconsiderar unidade sem siape do diretor
             "rdf_path" : "rdf/unidades_ufma.rdf"
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d : hashcode ("iffar",  d["id_unidade"]),
+                    "code" : "id_unidade",
+                    "sameas" : lambda d: "https://sig.iffarroupilha.edu.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"])                    
+            },
+
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/unidades-organizacionais.json"),
+            "rdf_path" : "rdf/unidades_iffar.rdf"
         },
 
     ]
