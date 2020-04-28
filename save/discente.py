@@ -168,7 +168,19 @@ serialize_rdf_discentes = {
             "rdf_path" : "rdf/discentes_ifrn.rdf"
         },
 
-        
+             { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d: hashcode ("iffar", "discente", d["id_discente"]),
+                    "code" : "id_discente",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "iffar", "docente", str (d["id_curso"]))
+            },
+
+            "data" : lambda :  dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/alunos.json?nivel=T"),
+            
+            "rdf_path" : "rdf/discentes_iffar.rdf"
+        },
 
     ]
 }

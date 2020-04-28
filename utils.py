@@ -57,3 +57,7 @@ def dados_csv (url, delimiter=","):
     data = json.dumps(list(reader))
     return json.loads(data)
 
+def dados_iffar(url):
+    data = requests.get(url).json()
+    print(data["info"])
+    return data["data"]

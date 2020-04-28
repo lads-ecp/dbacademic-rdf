@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode, dados_csv
+from utils import *
 
 from save.recursos import *
 
@@ -14,7 +14,7 @@ serialize_rdf_grupopesquisa = {
 
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "base_pesquisa", 
                     "id": lambda d : hashcode ("ufrn", "grupopesquisa", str(d["codigo"])),
@@ -28,7 +28,7 @@ serialize_rdf_grupopesquisa = {
         },
 
         { ## ufv
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_grupo", 
                     "id": lambda d : hashcode ("ufv", "grupopesquisa", str(d["_id"])),
@@ -43,7 +43,7 @@ serialize_rdf_grupopesquisa = {
 
 
         { ## ufca
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "Nome do Grupo", 
                     "id": lambda d : hashcode ("ufca", "grupopesquisa", str(d["_id"])),
@@ -57,7 +57,7 @@ serialize_rdf_grupopesquisa = {
         },
 
         { ## ifc
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "Nome do grupo", 
                     "id": lambda d : hashcode ("ifc", "grupopesquisa", str(d["Nome do grupo"])),
@@ -71,7 +71,7 @@ serialize_rdf_grupopesquisa = {
         },
 
         { ## ifpi
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_do_grupo", 
                     "id": lambda d : hashcode ("ifpi", "grupopesquisa", str(d["id_grupo"])),
@@ -85,7 +85,7 @@ serialize_rdf_grupopesquisa = {
         },
 
     { ## ufop
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "grupo", 
                     "id": lambda d : hashcode ("ufop", "grupopesquisa", str(d["id"])),
@@ -99,7 +99,7 @@ serialize_rdf_grupopesquisa = {
         },
 
         { ## unifesspa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_do_grupo", 
                     "id": lambda d : hashcode ("unifesspa", "grupopesquisa", str(d["_id"])),
@@ -110,6 +110,20 @@ serialize_rdf_grupopesquisa = {
 
             "data" : lambda :  dados_ckan ("http://ckan.unifesspa.edu.br/api/action/datastore_search?resource_id=d1eb1b6a-c4ff-4c4a-8d1d-91929ab14ed0") ,
             "rdf_path" : "rdf/grupospesquisa_unifesspa.rdf"
+        },
+
+           { ## iffar
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d : hashcode ("iffar", "grupopesquisa", str(d["id_grupo_pesquisa"])),
+                    "area" : lambda d: d["links"]["id_area_conhecimento_cnpq"]["title"].split(':')[1].strip(),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha",
+                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "docente", str(d["id_coordenador"]))
+            },
+
+            "data" : lambda :  dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/grupos-pesquisa.json"),
+            "rdf_path" : "rdf/grupospesquisa_iffar.rdf"
         },
 
     ]

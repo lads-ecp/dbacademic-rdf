@@ -36,7 +36,20 @@ serialize_rdf_subunidades = {
 
             "data" : lambda : dados_ufma("https://dados-ufma.herokuapp.com/api/v01/subunidade/"),
             "rdf_path" : "rdf/subunidades_ufma.rdf"
-        }
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d : hashcode ("iffar", "departamento", d["id_unidade"]),
+                    "code" : "id_unidade",
+                    "sameas" : lambda d: "https://sig.iffarroupilha.edu.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"])                    
+            },
+
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/unidades-organizacionais.json"),
+            "rdf_path" : "rdf/unidades_iffar.rdf"
+        },
 
     ]
 }

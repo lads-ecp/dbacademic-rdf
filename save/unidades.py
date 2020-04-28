@@ -56,6 +56,8 @@ serialize_rdf_unidades = {
             "rdf_path" : "rdf/unidades_ufpel.rdf"
         },
 
+        
+
     ]
 }
 

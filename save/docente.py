@@ -1,7 +1,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode, dados_csv
+from utils import *
 import requests
 
 sexo_dict = {
@@ -238,14 +238,18 @@ serialize_rdf_docentes = {
             "rdf_path" : "rdf/docentes_ufcspa.rdf"
         },
 
-        { ## iffar
+      { ## iffar
             "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
-                    "id" : lambda d: hashcode ("iffar", "docente", str(d["id_servidor"]))
+                    "siape": "id_servidor",
+                    "id" : lambda d: hashcode ("iffar",  "docente", str(d["id_servidor"])),
+                    "formacao": lambda d: d["links"]["id_formacao"]["title"].split(':')[1],
+                    "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "departamento", str (d["id_unidade"])),
+                    "sameas" : lambda d: "http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_servidor=" + str(d["id_servidor"])
             },
 
-            "data" : lambda : requests.get("http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_categoria=1").json()["data"],
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/servidores.json?id_categoria=1"),
             
             "rdf_path" : "rdf/docentes_iffar.rdf"
         },

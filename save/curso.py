@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode, dados_csv
+from utils import *
 
 from save.recursos import CURSO, DEPARTAMENTO
 
@@ -307,6 +307,21 @@ serialize_rdf_cursos = {
             "rdf_path" : "rdf/cursos_ifs.rdf"
         },
 
+      { ## iffar
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "code" : "id_curso",
+                    "id": lambda d: hashcode ( "iffar", "curso", str(d["id_curso"])),
+                    "area": lambda d: d["links"]["id_area_curso"]["title"].split(":")[1].strip(),
+                    "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "departamento", str (d["id_unidade"])),
+                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha"        
+            },
+
+            "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/cursos.json?nivel=G"),
+            
+            "rdf_path" : "rdf/cursos_iffar.rdf"
+        }
 
     ]
 }
