@@ -2,7 +2,7 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_sigaa, dados_ufma, hashcode
+from utils import dados_sigaa, dados_ufma, dados_iffar, hashcode
 
 
 serialize_rdf_discentes = {
@@ -12,7 +12,7 @@ serialize_rdf_discentes = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufrn", d["matricula"]),
@@ -26,7 +26,7 @@ serialize_rdf_discentes = {
         },
 
         { ## ufpi
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufpi", d["matricula"]),
@@ -40,7 +40,7 @@ serialize_rdf_discentes = {
         },
 
         { ## ufma
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "id": lambda d: hashcode ("ufma", d["matricula"]),
@@ -51,6 +51,20 @@ serialize_rdf_discentes = {
             "data" : lambda :  dados_ufma("https://dados-ufma.herokuapp.com/api/v01/discente/"),
             
             "rdf_path" : "rdf/discentes_ufma.rdf"
+        },
+
+        { ## iffar
+            "toSave" : True,
+            "mapper" : {
+                    "nome" : "nome", 
+                    "id": lambda d: hashcode ("iffar", d["id_discente"]),
+                    "code" : "id_discente",
+                    "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "iffar", str (d["id_curso"]))
+            },
+
+            "data" : lambda :  dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/alunos.json?nivel=T"),
+            
+            "rdf_path" : "rdf/discentes_iffar.rdf"
         },
 
     ]
