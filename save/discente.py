@@ -61,7 +61,7 @@ serialize_rdf_discentes = {
 
 
         { ## ifpa
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "Nome", 
                     "id": lambda d: hashcode ("ifpa", "discente", d["Matrícula"]),

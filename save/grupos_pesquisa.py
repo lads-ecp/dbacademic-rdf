@@ -128,7 +128,7 @@ serialize_rdf_grupopesquisa = {
         },
 
            { ## ufersa
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "titulo_projeto", 
                     "id": lambda d : hashcode ("ufersa", "grupopesquisa", str(d["codigo"])),
