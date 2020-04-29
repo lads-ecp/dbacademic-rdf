@@ -6,6 +6,8 @@ from utils import dados_ckan, dados_ufma, hashcode
 
 import requests
 
+from save.instituicoes_pt import *
+
 
 serialize_rdf_unidades = {
 
@@ -14,12 +16,12 @@ serialize_rdf_unidades = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_unidade", 
                     "code" : "id_unidade",
                     "id": lambda d : hashcode ("ufrn", "centro",   d["id_unidade"]),
-                    
+                    "university" : lambda d: UFRN,
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"]),                    
 
 
@@ -30,13 +32,14 @@ serialize_rdf_unidades = {
         },
 
         { ## ufma
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "id": lambda d : hashcode ("ufma", "centro",  d["codigo"]),
                     "code" : "codigo",
+                    "university" : lambda d: UFMA,
                     "diretor" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", "docente", d["siape_diretor"]),
-                    "sameas" : "url_sigaa",                    
+                    "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/centro/portal.jsf?id="+str(d["codigo"]),                    
             },
 
             "data" : lambda : list ( filter ( lambda d: "siape_diretor" in d, requests.get("https://dados-live-ufma.herokuapp.com/api/v01/unidade/").json() )), # nao desconsiderar unidade sem siape do diretor
@@ -44,15 +47,15 @@ serialize_rdf_unidades = {
         },
 
         { ## ufpel
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "id": lambda d : hashcode ("ufma", "centro",  d["cod_unidade"]),
                     "code" : "cod_unidade",
-                    "sameas" : "site",                    
+                    "university" : lambda d: UFPEL,               
             },
 
-            "data" : lambda : dados_ckan("http://dados.ufpel.edu.br/api/action/datastore_search?resource_id=3cac9468-e23e-4cc7-a83f-de670520c902")
+            "data" : lambda : dados_ckan("http://dados.ufpel.edu.br/api/action/datastore_search?resource_id=3cac9468-e23e-4cc7-a83f-de670520c902"),
             "rdf_path" : "rdf/unidades_ufpel.rdf"
         },
 

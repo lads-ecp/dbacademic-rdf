@@ -5,6 +5,7 @@ from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 from utils import *
 
 from save.recursos import CURSO, DEPARTAMENTO
+from save.instituicoes_pt import *
 
 import requests
 
@@ -28,7 +29,7 @@ serialize_rdf_cursos = {
                     "code" : "id_curso",
                     "area" : "area_conhecimento",
                     "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
+                    "university" : lambda d: UFRN,
                     "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn","departamento", str (d["id_unidade_responsavel"])),
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/curso/portal.jsf?id=" + d["id_curso"],
             },
@@ -45,7 +46,7 @@ serialize_rdf_cursos = {
                     "code" : lambda d: d["website"][ d["website"].index("?id=") +4: d["website"].index("&lc") ],
                     "id": lambda d: hashcode ( "ufpi", CURSO,  d["website"][ d["website"].index("?id=") +4: d["website"].index("&lc") ]),
                     "area" : "Area",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Piaui",
+                    "university" : lambda d: UFPI,
                     "sameas" : "website",
             },
 
@@ -61,7 +62,7 @@ serialize_rdf_cursos = {
                     "nome" : "nome", 
                     "code" : "id_curso",
                     "id": lambda d: hashcode ( "ufpb",  CURSO, str (d["id_curso"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Para%C3%ADba",
+                    "university" : lambda d: UFPB,
                     "sameas" : lambda d: "https://sigaa.ufpbbr/sigaa/public/curso/portal.jsf?id=" + str(d["id_curso"]),
                     
             },
@@ -77,7 +78,7 @@ serialize_rdf_cursos = {
                     "nome" : CURSO, 
                     "code" : "id",
                     "id": lambda d: hashcode ( "ufms",  CURSO, d["id"]),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Mato_Grosso_do_Sul",
+                    "university" : lambda d: UFMS,
                     
             },
 
@@ -94,7 +95,7 @@ serialize_rdf_cursos = {
                     "id": lambda d: hashcode ( "ufma",  CURSO, d["codigo"]),
                     "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufma", "docente", str (d["coordenador"])),
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/curso/portal.jsf?id=" + d["codigo"],
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Maranhao",
+                    "university" : lambda d: UFMA,
                     
             },
 
@@ -110,7 +111,7 @@ serialize_rdf_cursos = {
                     "code" : "cod_curso",
                     "id": lambda d: hashcode ( "ufpel", CURSO, str(d["cod_curso"])),
                     "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufpel", DEPARTAMENTO, str (d["cod_unidade"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Pelotas",        
+                    "university" : lambda d: UFPEL,        
             },
 
             "data" : lambda : dados_ckan("http://dados.ufpel.edu.br/api/action/datastore_search?resource_id=335bed66-d18b-40e1-9ac1-0db6d4f50a99"),
@@ -124,7 +125,7 @@ serialize_rdf_cursos = {
                     "nome" : "nome_curso", 
                     "code" : "_id",
                     "id": lambda d: hashcode ( "ufca", CURSO, str(d["_id"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Universidade_Federal_do_Cariri",        
+                    "university" : lambda d: UFCA,        
             },
 
             "data" : lambda : dados_ckan("https://dados.ufca.edu.br/api/action/datastore_search?resource_id=5f31e620-a366-42c9-a54c-96da666c93b7"),
@@ -138,7 +139,7 @@ serialize_rdf_cursos = {
                     "nome" : "nome_curso", 
                     "code" : "_id",
                     "id": lambda d: hashcode ( "unifesspa", CURSO, str(d["_id"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Southern_and_Southeastern_Par%C3%A1",        
+                    "university" : lambda d: UNIFESSPA,        
             },
 
             "data" : lambda : dados_ckan("http://ckan.unifesspa.edu.br/api/action/datastore_search?resource_id=9ee93dc4-9398-43fc-91c4-1173b9378fed"),
@@ -152,7 +153,7 @@ serialize_rdf_cursos = {
                     "nome" : "nome", 
                     "code" : "_id",
                     "id": lambda d: hashcode ( "ufv", CURSO, str(d["_id"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Vi%C3%A7osa",        
+                    "university" : lambda d: UFV,        
             },
 
             "data" : lambda : dados_ckan("http://dados.ufv.br/api/3/action/datastore_search?resource_id=e569f2e0-8ba0-4922-b715-9928980ae9f2"),
@@ -167,7 +168,7 @@ serialize_rdf_cursos = {
                     "code": "codigo",
                     #"id" : lambda d: hashcode ("ifma",  "curso", str(d["codigo"])),
                     "id" : lambda d: hashcode ("ifma",  "curso", str(d["descricao"]).upper()),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Maranhao",        
+                    "university" : lambda d: IFMA,        
 
             }, 
 
@@ -184,7 +185,7 @@ serialize_rdf_cursos = {
                     "nome" : "descricao", 
                     "code": "codigo",
                     "id" : lambda d: hashcode ("ifrn",  "curso", str(d["codigo"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Rio_Grande_do_Norte",        
+                    "university" : lambda d: IFRN,        
 
             }, 
 
@@ -201,7 +202,7 @@ serialize_rdf_cursos = {
                     "nome" : "descricao", 
                     "code": "codigo",
                     "id" : "uuid", #lambda d: hashcode ("ifpb",  "curso", str(d["codigo"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Paraiba",        
+                    "university" : lambda d: IFPB,        
 
             }, 
 
@@ -219,7 +220,7 @@ serialize_rdf_cursos = {
                     "nome" : "NOME_CURSO_DIPLOMA", 
                     "code" : "_id",
                     "id": lambda d: hashcode ( "ufcspa", "curso", str(d["_id"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Health_Sciences_of_Porto_Alegre",        
+                    "university" : lambda d: UFCSPA,        
             },
 
             "data" : lambda : dados_ckan("https://dados.ufcspa.edu.br/api/action/datastore_search?resource_id=6096d836-9160-43ae-bbbd-8712d4b202ca"),
@@ -233,7 +234,7 @@ serialize_rdf_cursos = {
                     "nome" : "nome_curso", 
                     "code" : "codCurso",
                     "id": lambda d: hashcode ( "ufsj", "curso", str(d["codCurso"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_S%C3%A3o_Jo%C3%A3o_del-Rei",        
+                    "university" : lambda d: UFSJ,        
             },
 
             "data" : lambda : dados_ckan("http://dados.ufsj.edu.br/api/action/datastore_search?resource_id=15625dc7-acc2-45e8-9189-46e4362c013f"),
@@ -248,7 +249,7 @@ serialize_rdf_cursos = {
                     "code" : "cod_uffs",
                     "id": lambda d: hashcode ( "uffs", "curso", str(d["cod_uffs"])),
                     "coordenador" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "uffs", "docente", str (d["coord_curso"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Fronteira_Sul",        
+                    "university" : lambda d: UFFS,        
             },
 
             "data" : lambda : dados_ckan("https://dados.uffs.edu.br/api/3/action/datastore_search?resource_id=c35a0c22-fe50-4d7c-8339-7f253fe7e977"),
@@ -263,7 +264,7 @@ serialize_rdf_cursos = {
                     "code" : "COD_CURSO",
                     "id": lambda d: hashcode ( "unirio", "curso", str(d["COD_CURSO"])),
                     "area": "DESCR_AREA_CONHEC",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_the_State_of_Rio_de_Janeiro",        
+                    "university" : lambda d: UNIRIO,        
             },
 
             "data" : lambda : dados_csv("http://dados.unirio.br/dataset/bfc6f424-6137-4feb-9c4e-5512f8821415/resource/83d0d21f-63e1-4295-959a-1683e6a21937/download/cursosunirio2.csv"),
@@ -278,7 +279,7 @@ serialize_rdf_cursos = {
                     "code" : "_id",
                     #"id": lambda d: hashcode ( "ifms", "curso", str(d["_id"])),
                     "id": lambda d: hashcode ( "ifms", "curso", str(d["curso"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Mato_Grosso_do_Sul",        
+                    "university" : lambda d: IFMS,        
             },
 
             "data" : lambda : list ( filter ( lambda d: d["nivel_ensino_curso"] == "Educação Superior",
@@ -296,7 +297,7 @@ serialize_rdf_cursos = {
                     #"code": "codigo",
                     #"id" : lambda d: hashcode ("ifma",  "curso", str(d["codigo"])),
                     "id" : lambda d: hashcode ("ifs",  "curso", str(d["Nome"]).upper()),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Espirito_Santo",        
+                    "university" : lambda d: IFS,        
 
             }, 
 
@@ -315,7 +316,7 @@ serialize_rdf_cursos = {
                     "id": lambda d: hashcode ( "iffar", "curso", str(d["id_curso"])),
                     "area": lambda d: d["links"]["id_area_curso"]["title"].split(":")[1].strip(),
                     "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "departamento", str (d["id_unidade"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha"        
+                    "university" : lambda d: IFFAR        
             },
 
             "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/cursos.json?nivel=G"),

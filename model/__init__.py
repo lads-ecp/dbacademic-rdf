@@ -68,6 +68,8 @@ class Docente ():
 
     unidade = ORG.memberOf
 
+    university = ORG.memberOf
+
     sexo = VCARD.hasGender
 
     telefone = VCARD.hasTelephone
@@ -85,6 +87,10 @@ class Docente ():
     @BNamespace('org', ORG)
     def __init__(self, dict):
         self.nome = Literal(dict["nome"])
+
+        if "university" in dict:
+            self.university = URIRef(dict["university"])
+
         if "siape" in dict:
             self.siape = Literal(dict["siape"])
         self.id = str(dict["id"])
@@ -130,6 +136,8 @@ class Unidade ():
     diretor = AIISO.responsibilityOf
     code= AIISO.code
 
+    university = AIISO.part_of
+
      # unidade ? ou subunidade
     @RdfsClass(AIISO.Center, "https://www.dbacademic.tech/resource/")   
     @BNamespace('foaf', FOAF)
@@ -144,9 +152,13 @@ class Unidade ():
             self.sameas = URIRef(dict["sameas"])
         if "diretor" in dict:
             self.diretor = URIRef(dict["diretor"])
+        if "university" in dict:
+            self.university = URIRef(dict["university"])
 
 class Subunidade ():
 
+
+    university = AIISO.part_of
     nome = FOAF.name
     sameas = OWL.sameas
     chefe = AIISO.responsibilityOf
@@ -168,12 +180,16 @@ class Subunidade ():
         if "unidade" in dict:
             self.unidade = URIRef(dict["unidade"])
 
+        if "university" in dict:
+            self.university = URIRef(dict["university"])
+
 class Discente ():
 
     nome = FOAF.name
     curso = OPENCIN.isMemberOf
     code= DC.identifier
 
+    university = ORG.memberOf
 
     @RdfsClass(OPENCIN.Student, "https://www.dbacademic.tech/resource/")
     @BNamespace('foaf', FOAF)
@@ -187,6 +203,8 @@ class Discente ():
         self.code = dict["code"]
         if "curso" in dict:
             self.curso = URIRef(dict["curso"])
+        if "university" in dict:
+            self.university = URIRef(dict["university"])
 
 class GrupoPesquisa ():
 
@@ -203,7 +221,8 @@ class GrupoPesquisa ():
     def __init__(self, dict):
         self.id = dict["id"]
         self.nome = Literal (dict["nome"])
-        self.area = Literal (dict["area"])
+        if "area" in dict:
+            self.area = Literal (dict["area"])
         if "coordenador" in dict:
             self.coordenador = URIRef(dict["coordenador"])
         self.university = URIRef(dict["university"])
@@ -214,6 +233,7 @@ class Monografia ():
     title = DC.title
     autor = DC.creator
     curso = BIBO.issuer
+    university = BIBO.issuer
     orientador = DC.contributor
 
     @RdfsClass(BIBO.Report, "https://www.dbacademic.tech/resource/")
@@ -224,8 +244,9 @@ class Monografia ():
         self.id = dict["id"]
         if "curso" in dict:
             self.curso = URIRef(dict["curso"])
+        if "university" in dict:
+            self.curso = URIRef(dict["university"])
         if "autor" in dict:
-            #self.autor = URIRef(dict["autor"])
             self.autor = Literal(dict["autor"])
         if "orientador" in dict:
             self.orientador = URIRef(dict["orientador"])        

@@ -9,7 +9,7 @@ import json
 
 
 def dados_ckan (url):
-    data = requests.get(url+"&limit=1000000").json()
+    data = requests.get(url+"&limit=300000000").json()
     print (len (data["result"]["records"] ))
     return data["result"]["records"]
 
@@ -27,8 +27,9 @@ def hashcode (university, resource,  code):
 s ="Estudo Comparativo de Estratégias de Controle Aplicadas a um Gerador Síncrono"
 
 def removeNonUTF8 (s):
+    return s.replace("","").encode().decode('utf-8', 'ignore')
     #return bytes(s, 'utf-8').decode('utf-8', 'ignore')
-    return ''.join(x for x in s if x in string.printable)
+    #return ''.join(x for x in s if x in string.printable)
     #return str(bytes(s, 'utf-8').decode('cp1252').encode('utf-8'))
 
 def remove_unicode(string_data):
@@ -61,3 +62,11 @@ def dados_iffar(url):
     data = requests.get(url).json()
     print(data["info"])
     return data["data"]
+
+'''
+s = {"UFMA", "UFPI", "UFRN", "IFPA",  "IFMA", "UFMA", "UFPI", "UFRN", "UNIFESSPA", "UFSJ", "IFMA", "IFPB", "IFRN", "IFMS", "IFS", "UFCSPA", "UFV", "UFMS", "UFPEL","UFMA", "UFPI", "UFRN", "UFPB", "UFMS", "IFMA", "UFCA", "UFCSPA", "UFFS", "UFPEL", "IFMS", "IFPB", "IFRN", "UFSJ", "UFV", "UNIFESSPA", "UNIRIO", "UFMA", "UFPEL", "UFRN", "UFMA", "UFRN", "UFRN","UFMA", "UFRN"}
+print (len(s))
+print(s)
+'''
+
+# 

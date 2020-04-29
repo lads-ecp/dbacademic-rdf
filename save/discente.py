@@ -6,6 +6,8 @@ from utils import *
 
 import requests
 
+from save.instituicoes_pt import *
+
 serialize_rdf_discentes = {
 
     "classType" : Discente,
@@ -18,6 +20,7 @@ serialize_rdf_discentes = {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufrn", "discente", d["matricula"]),
                     "code" : "matricula",
+                    "university" : lambda d: UFRN,
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "curso", str (d["id_curso"]))
             },
 
@@ -32,6 +35,7 @@ serialize_rdf_discentes = {
                     "nome" : "nome_discente", 
                     "id": lambda d: hashcode ("ufpi",  "discente", d["matricula"]),
                     "code" : "matricula",
+                    "university" : lambda d: UFPI,
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufpi","curso", str (d["id_curso"]))
             },
 
@@ -46,6 +50,7 @@ serialize_rdf_discentes = {
                     "nome" : "nome", 
                     "id": lambda d: hashcode ("ufma", "discente", d["matricula"]),
                     "code" : "matricula",
+                    "university" : lambda d: UFMA,
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", "curso", str (d["codigo_curso"]))
             },
 
@@ -56,10 +61,11 @@ serialize_rdf_discentes = {
 
 
         { ## ifpa
-            "toSave" : False,
+            "toSave" : True,
             "mapper" : {
                     "nome" : "Nome", 
                     "id": lambda d: hashcode ("ifpa", "discente", d["Matrícula"]),
+                    "university" : lambda d: IFPA,
                     "code" : "Matrícula",
                     #"curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", "curso", str (d["codigo_curso"]))
             },
@@ -69,25 +75,14 @@ serialize_rdf_discentes = {
             "rdf_path" : "rdf/discentes_ifpa.rdf"
         },
 
-        { ## ifms
-            "toSave" : False,
-            "mapper" : {
-                    "nome" : "Nome", 
-                    "id": lambda d: hashcode ("ifpa", "discente", d["Matrícula"]),
-                    "code" : "Matrícula",
-                    #"curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufma", "curso", str (d["codigo_curso"]))
-            },
-
-            "data" : lambda :  dados_ckan("http://dados.ifms.edu.br/api/action/datastore_search?resource_id=b8b4dfdf-98ef-4d57-baff-75c163be6e9a&limit=5"),
-            
-            "rdf_path" : "rdf/discentes_ifpa.rdf"
-        },
+   
 
 
         { ## ifma
             "toSave" : False,
             "mapper" : {
-                    "nome" : "nome", 
+                    "nome" : "nome",
+                    "university" : lambda d: IFMA, 
                     "id": lambda d: hashcode ("ifma", "discente", d["matricula"]),
                     "code" : "matricula",
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ifma", "curso", str (d["curso"].upper()))
@@ -103,6 +98,7 @@ serialize_rdf_discentes = {
             "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
+                    "university" : lambda d: IFC,
                     "id": lambda d: hashcode ("ifc", "discente", d["nome"]),
                     "code" : lambda d: hashcode ("ifc", "discente", d["nome"]),
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ifc", "curso", str (d["curso"].upper()))
@@ -120,9 +116,9 @@ serialize_rdf_discentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "code": "matricula",
+                    "university" : lambda d: IFPB,
                     "id" : "uuid",
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + d["curso"]["uuid"] ,
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Paraiba",        
 
             }, 
 
@@ -137,9 +133,10 @@ serialize_rdf_discentes = {
             "toSave" : False,
             "mapper" : {
                     "nome" : "curso", 
+                    "university" : lambda d: IFMS,
                     "code" : "ra",
                     "id": lambda d: hashcode ( "ifms", "discente", str(d["ra"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Mato_Grosso_do_Sul",        
+                    "university" : lambda d: IFMS,        
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ifms", "curso", str (d["curso"].upper()))
             },
 
@@ -152,12 +149,12 @@ serialize_rdf_discentes = {
 
 
         { ## ifrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
                     "code": "matricula",
+                    "university" : lambda d: IFRN,
                     "id" : lambda d: hashcode ("ifrn",  "discente", str(d["matricula"])),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_of_Rio_Grande_do_Norte",        
 
             }, 
 
@@ -169,10 +166,11 @@ serialize_rdf_discentes = {
         },
 
              { ## iffar
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
-                    "id": lambda d: hashcode ("iffar", "discente", d["id_discente"]),
+                    "university" : lambda d: IFFAR,
+                    "id": lambda d: hashcode ("iffar", "discente", str(d["id_discente"])),
                     "code" : "id_discente",
                     "curso": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "iffar", "docente", str (d["id_curso"]))
             },

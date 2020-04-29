@@ -2,6 +2,9 @@ from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
 from utils import *
+
+from save.instituicoes_pt import *
+
 import requests
 
 sexo_dict = {
@@ -25,7 +28,9 @@ serialize_rdf_docentes = {
                     "formacao" : "formacao",
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"],
                     #"sexo": lambda d: sexo_dict[d["sexo"]],
+                    "university" : lambda d: UFRN,
                     "unidade": lambda d: "https://www.dbacademic.tech/resource/" + hashcode ( "ufrn", "departamento", str (d["id_unidade_lotacao"]))  
+
             },
 
             "data" : lambda :  dados_ckan("http://dados.ufrn.br/api/action/datastore_search?resource_id=ff0a457e-76fa-4aca-ad99-48aebd7db070"),
@@ -41,6 +46,7 @@ serialize_rdf_docentes = {
                     "siape": "vinculo_servidor",
                     "id" : lambda d: hashcode ("unifespa",  "docente", d["vinculo_servidor"]),
                     "formacao": "escolaridade",
+                    "university" : lambda d: UNIFESSPA,
                     "sameas" : lambda d: "https://sigaa.unifesspa.edu.br/sigaa/public/docente/portal.jsf?siape=" + d["vinculo_servidor"]
             },
 
@@ -56,6 +62,7 @@ serialize_rdf_docentes = {
                     "nome" : "nome", 
                     "siape": "siape",
                     "id" : lambda d: hashcode ("ufpi",  "docente", d["siape"]),
+                    "university" : lambda d: UFPI,
                     "sameas" : lambda d: "https://sigaa.ufpi.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"]
             },
 
@@ -70,6 +77,7 @@ serialize_rdf_docentes = {
                     "nome" : "nome", 
                     "siape": "siape",
                     "id" : lambda d: hashcode ("ufsj",  "docente", d["siape"]),
+                    "university" : lambda d: UFSJ,
                     "sameas" : lambda d: "https://sig.ufsj.edu.br/sigaa/public/docente/portal.jsf?siape=" + d["siape"]
             },
 
@@ -90,7 +98,7 @@ serialize_rdf_docentes = {
                     "email" : "email",
                     "lattes" : "lattes",
                     "descricao" : "descricao",
-
+                    "university" : lambda d: UFMA,
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/docente/portal.jsf?siape=" + str(d["siape"])
             }, 
 
@@ -104,6 +112,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "matricula",
+                    "university" : lambda d: IFMA,
                     "id" : lambda d: hashcode ("ifma",  "docente", str(d["matricula"])),
                     "lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
 
@@ -121,6 +130,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "matricula",
+                    "university" : lambda d: IFRN,
                     "id" : lambda d: hashcode ("ifrn",  "docente", str(d["matricula"])),
                     #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
 
@@ -138,6 +148,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "matricula",
+                    "university" : lambda d: IFPB,
                     "id" : lambda d: hashcode ("ifpb",  "docente", str(d["matricula"])),
                     #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
 
@@ -157,6 +168,7 @@ serialize_rdf_docentes = {
                     "nome" : "servidor", 
                     "siape": "matricula", # siape nao está completo
                     "formacao" : "titulacao",
+                    "university" : lambda d: IFMS,
                     "id" : lambda d: hashcode ("ifms",  "docente", str(d["servidor"]).upper()),
                     #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
 
@@ -174,6 +186,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     #"formacao" : "titulacao",
+                    "university" : lambda d: IFS,
                     "id" : lambda d: hashcode ("ifs",  "docente", str(d["nome"]).upper()),
                     #"lattes" : lambda d: "http://lattes.cnpq.br/"+(d["curriculo_lattes"] or "") ,
 
@@ -193,6 +206,7 @@ serialize_rdf_docentes = {
                     "nome" : "nome", 
                     "siape": "siape",
                     "formacao": "titulacao",
+                    "university" : lambda d: UFPEL,
                     "id" : lambda d: hashcode ("ufpel", "docente", d["siape"])
             },
 
@@ -205,7 +219,9 @@ serialize_rdf_docentes = {
             "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
+                    "university" : lambda d: UFMS,
                     "id" : lambda d: hashcode ("ufms", "docente", str(d["_id"]))
+
             },
 
             "data" : lambda : dados_ckan("https://dadosabertos.ufms.br/api/action/datastore_search_sql?sql=SELECT%20*%20from%20%22a8ca7f30-0824-489b-8c70-faddcbd74f53%22%20WHERE%20cargo%20LIKE%20%27Professor%25%27"),
@@ -218,6 +234,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "siape",
+                    "university" : lambda d: UFV,
                     "id" : lambda d: hashcode ("ufv", "docente", d["siape"])
             },
 
@@ -229,7 +246,8 @@ serialize_rdf_docentes = {
         { ## ufcspa
             "toSave" : False,
             "mapper" : {
-                    "nome" : "NOME_FUNCIONARIO", 
+                    "nome" : "NOME_FUNCIONARIO",
+                    "university" : lambda d: UFCSPA, 
                     "id" : lambda d: hashcode ("ufcspa", "docente", str(d["_id"]))
             },
 
@@ -243,6 +261,7 @@ serialize_rdf_docentes = {
             "mapper" : {
                     "nome" : "nome", 
                     "siape": "id_servidor",
+                    "university" : lambda d: IFFAR,
                     "id" : lambda d: hashcode ("iffar",  "docente", str(d["id_servidor"])),
                     "formacao": lambda d: d["links"]["id_formacao"]["title"].split(':')[1],
                     "unidade" : lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "departamento", str (d["id_unidade"])),

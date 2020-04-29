@@ -2,8 +2,9 @@
 from model import  Docente, Curso, Discente, Unidade, Monografia, GrupoPesquisa, Subunidade
 from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 
-from utils import dados_ckan, dados_ufma, hashcode
+from utils import dados_ckan, dados_ufma, hashcode, dados_iffar
 
+from save.instituicoes_pt import *
 
 serialize_rdf_subunidades = {
 
@@ -12,11 +13,12 @@ serialize_rdf_subunidades = {
     "collection" : [
 
         { ## ufrn
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome_unidade", 
                     "id": lambda d : hashcode ("ufrn", "departamento", d["id_unidade"]),
                     "code" : "id_unidade",
+                    "university" : lambda d: UFRN,
                     "unidade": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "centro", d["id_unidade_responsavel"]),
                     "sameas" : lambda d: "https://sigaa.ufrn.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"]),                    
             },
@@ -26,9 +28,10 @@ serialize_rdf_subunidades = {
         },
 
         { ## ufma
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
+                    "university" : lambda d: UFMA,
                     "id": lambda d : hashcode ("ufma", "departamento", d["codigo"]),
                     "code" : "codigo",
                     "sameas" : lambda d: "https://sigaa.ufma.br/sigaa/public/departamento/portal.jsf?id=" + str(d["codigo"]),                    
@@ -39,16 +42,17 @@ serialize_rdf_subunidades = {
         },
 
         { ## iffar
-            "toSave" : True,
+            "toSave" : False,
             "mapper" : {
                     "nome" : "nome", 
-                    "id": lambda d : hashcode ("iffar", "departamento", d["id_unidade"]),
+                    "university" : lambda d: IFFAR,
+                    "id": lambda d : hashcode ("iffar", "departamento", str(d["id_unidade"])),
                     "code" : "id_unidade",
                     "sameas" : lambda d: "https://sig.iffarroupilha.edu.br/sigaa/public/departamento/portal.jsf?id=" + str(d["id_unidade"])                    
             },
 
             "data" : lambda : dados_iffar("http://dados.iffarroupilha.edu.br/api/v1/unidades-organizacionais.json"),
-            "rdf_path" : "rdf/unidades_iffar.rdf"
+            "rdf_path" : "rdf/subunidades_iffar.rdf"
         },
 
     ]

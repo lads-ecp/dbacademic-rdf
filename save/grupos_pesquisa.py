@@ -5,6 +5,7 @@ from simpot import serialize_to_rdf_file, mapper_all, serialize_all_to_rdf
 from utils import *
 
 from save.recursos import *
+from save.instituicoes_pt import *
 
 serialize_rdf_grupopesquisa = {
 
@@ -19,7 +20,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "base_pesquisa", 
                     "id": lambda d : hashcode ("ufrn", "grupopesquisa", str(d["codigo"])),
                     "area" : "area_conhecimento_cnpq",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Rio_Grande_do_Norte",
+                    "university" : lambda d: UFRN,
                     "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
@@ -33,7 +34,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "nome_grupo", 
                     "id": lambda d : hashcode ("ufv", "grupopesquisa", str(d["_id"])),
                     "area" : "area_predominante",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Vicosa",
+                    "university" : lambda d: UFV,
                    # "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
@@ -48,7 +49,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "Nome do Grupo", 
                     "id": lambda d : hashcode ("ufca", "grupopesquisa", str(d["_id"])),
                     "area" : "Área Predominante",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Vicosa",
+                    "university" : lambda d: UFCSPA,
                    # "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
@@ -62,7 +63,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "Nome do grupo", 
                     "id": lambda d : hashcode ("ifc", "grupopesquisa", str(d["Nome do grupo"])),
                     "area" : "Área predominante do grupo",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Instituto_Catarinense",
+                    "university" : lambda d: IFC,
                    # "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
@@ -76,7 +77,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "nome_do_grupo", 
                     "id": lambda d : hashcode ("ifpi", "grupopesquisa", str(d["id_grupo"])),
                     "area" : "area_predominante",
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_University_of_Piaui",
+                    "university" : lambda d: IFPI,
                    # "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "ufrn", "docente", str (d["id_coordenador"])),
             },
 
@@ -118,7 +119,7 @@ serialize_rdf_grupopesquisa = {
                     "nome" : "nome", 
                     "id": lambda d : hashcode ("iffar", "grupopesquisa", str(d["id_grupo_pesquisa"])),
                     "area" : lambda d: d["links"]["id_area_conhecimento_cnpq"]["title"].split(':')[1].strip(),
-                    "university" : lambda d: "http://dbpedia.org/resource/Federal_Institute_Farroupilha",
+                    "university" : lambda d: IFFAR,
                     "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode ( "iffar", "docente", str(d["id_coordenador"]))
             },
 
@@ -126,7 +127,22 @@ serialize_rdf_grupopesquisa = {
             "rdf_path" : "rdf/grupospesquisa_iffar.rdf"
         },
 
+           { ## ufersa
+            "toSave" : False,
+            "mapper" : {
+                    "nome" : "titulo_projeto", 
+                    "id": lambda d : hashcode ("ufersa", "grupopesquisa", str(d["codigo"])),
+                    "area" : lambda d: "area",
+                    "coordenador": lambda d: "https://www.dbacademic.tech/resource/" +  hashcode("ufersa", "docente", str(d["codigo"])),
+                    "university" : lambda d: UFERSA,
+            },
+
+            "data" : lambda :  dados_csv("http://api.ufersa.edu.br:8080/apiufersa/rest/pda/projetos-pesquisa"),
+            "rdf_path" : "rdf/grupospesquisa_ufersa.rdf"
+        },
+
     ]
 }
 
 serialize_all_to_rdf(serialize_rdf_grupopesquisa)
+
